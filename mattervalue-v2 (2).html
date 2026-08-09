@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatterValue.ai — Law firm AI, productized</title>
+<meta name="description" content="AI strategy for law firms, delivered as fixed-fee products and a standing advisory retainer — not an embedded consulting team. Built and run by one operator.">
+<meta property="og:title" content="MatterValue.ai — Law firm AI, productized">
+<meta property="og:description" content="Fixed-fee diagnostics, a product library, standing advisory, and the Sovereign Reasoning coaching system. One operator, no theater.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --buckram:#1B2A22;
+  --buckram-2:#223529;
+  --buckram-3:#2A4133;
+  --paper:#F2EFE3;
+  --paper-line:#D9D3BE;
+  --ink:#23281F;
+  --ink-soft:#5A5F52;
+  --oxblood:#8C2F24;
+  --oxblood-bright:#A83A2C;
+  --brass:#C29B4A;
+  --sage:#9DB0A2;
+  --sage-dim:#6E8276;
+  --display:'Fraunces',Georgia,serif;
+  --body:'Public Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--buckram);
+  color:var(--paper);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--brass);color:var(--buckram)}
+a{color:inherit}
+em,i{font-style:italic}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* ---------- utility type ---------- */
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--brass);
+}
+.eyebrow::before{content:"§ ";color:var(--sage-dim)}
+h2{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(30px,4.4vw,46px);line-height:1.12;
+  letter-spacing:-.01em;margin:14px 0 20px;
+}
+h2 em{color:var(--brass);font-weight:400}
+.lede{max-width:640px;color:var(--sage);font-size:18px}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--buckram) 92%,transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--buckram-3);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--display);font-size:20px;font-weight:600;text-decoration:none}
+.logo span{color:var(--brass)}
+.nav-links{display:flex;gap:28px;align-items:center;list-style:none}
+.nav-links a{
+  text-decoration:none;font-size:14px;color:var(--sage);
+  transition:color .15s;
+}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--paper)}
+.nav-cta{
+  font-family:var(--mono);font-size:13px;
+  border:1px solid var(--brass);color:var(--brass)!important;
+  padding:8px 16px;border-radius:2px;
+}
+.nav-cta:hover{background:var(--brass);color:var(--buckram)!important}
+@media(max-width:760px){.nav-links li:not(:last-child){display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:110px 0 90px;position:relative;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(color-mix(in srgb,var(--paper) 4%,transparent) 1px,transparent 1px);
+  background-size:100% 44px;
+  mask-image:linear-gradient(to bottom,transparent 30%,black 100%);
+  opacity:.35;
+}
+.hero .eyebrow{margin-bottom:22px;display:block}
+h1{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(40px,6.6vw,76px);line-height:1.04;
+  letter-spacing:-.015em;max-width:880px;
+}
+h1 em{color:var(--brass);font-weight:400}
+.hero p{margin:28px 0 36px;max-width:620px;font-size:19px;color:var(--sage)}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;position:relative;z-index:1}
+.btn{
+  display:inline-block;text-decoration:none;border-radius:2px;
+  font-family:var(--mono);font-size:14px;letter-spacing:.04em;
+  padding:14px 26px;transition:transform .15s,background .15s;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--oxblood);color:var(--paper)}
+.btn-primary:hover{background:var(--oxblood-bright)}
+.btn-ghost{border:1px solid var(--buckram-3);color:var(--sage)}
+.btn-ghost:hover{border-color:var(--brass);color:var(--brass)}
+.hero-note{
+  margin-top:40px;font-family:var(--mono);font-size:12.5px;
+  color:var(--sage-dim);letter-spacing:.06em;
+}
+
+/* ---------- thesis ---------- */
+.thesis{padding:90px 0;border-top:1px solid var(--buckram-3)}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.thesis-grid p{color:var(--sage);margin-bottom:18px}
+.thesis-grid p strong{color:var(--paper);font-weight:600}
+@media(max-width:820px){.thesis-grid{grid-template-columns:1fr}}
+
+/* ---------- fee schedule (signature) ---------- */
+.schedule{padding:90px 0 100px;border-top:1px solid var(--buckram-3)}
+.sheet{
+  position:relative;margin-top:44px;
+  background:var(--paper);color:var(--ink);
+  border-radius:3px;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.55),0 2px 0 rgba(0,0,0,.3);
+  padding:56px 60px 48px;
+}
+.sheet::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:6px;
+  background:var(--oxblood);border-radius:3px 3px 0 0;
+}
+@media(max-width:700px){.sheet{padding:40px 22px 36px}}
+.sheet-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:20px;flex-wrap:wrap;padding-bottom:26px;
+  border-bottom:2px solid var(--ink);
+}
+.sheet-head h3{
+  font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:.01em;
+}
+.sheet-head .sub{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+.stamp{
+  font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  color:var(--oxblood);border:2px solid var(--oxblood);
+  padding:8px 14px;border-radius:2px;text-transform:uppercase;
+  transform:rotate(-3deg);white-space:nowrap;
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='1.3' fill='black'/%3E%3Ccircle cx='3' cy='3' r='1.3' fill='black'/%3E%3C/svg%3E");
+  mask-size:3px 3px;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='1.3' fill='black'/%3E%3Ccircle cx='3' cy='3' r='1.3' fill='black'/%3E%3C/svg%3E");
+  -webkit-mask-size:3px 3px;
+}
+.line-item{
+  display:grid;grid-template-columns:64px 1fr auto;gap:24px;
+  padding:26px 0;border-bottom:1px solid var(--paper-line);
+  align-items:baseline;text-decoration:none;color:inherit;
+  transition:background .15s;
+}
+.line-item:hover{background:color-mix(in srgb,var(--brass) 8%,transparent)}
+.line-item:last-of-type{border-bottom:2px solid var(--ink)}
+.li-num{font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+.li-name{font-family:var(--display);font-size:22px;font-weight:500;line-height:1.25}
+.li-desc{font-size:15px;color:var(--ink-soft);margin-top:6px;max-width:520px}
+.li-fee{font-family:var(--mono);font-size:15px;text-align:right;white-space:nowrap}
+.li-fee small{display:block;font-size:11.5px;color:var(--ink-soft);letter-spacing:.06em;margin-top:3px}
+.li-flag{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--oxblood);
+  border:1px solid var(--oxblood);padding:2px 7px;border-radius:2px;
+  margin-left:10px;vertical-align:middle;
+}
+@media(max-width:700px){
+  .line-item{grid-template-columns:1fr;gap:6px}
+  .li-fee{text-align:left;margin-top:4px}
+}
+.sheet-foot{
+  padding-top:22px;font-family:var(--mono);font-size:12px;
+  color:var(--ink-soft);letter-spacing:.04em;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+
+/* ---------- offers detail ---------- */
+.offers{padding:20px 0 40px}
+.offer{
+  padding:80px 0;border-top:1px solid var(--buckram-3);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:60px;
+}
+.offer:target{scroll-margin-top:80px}
+@media(max-width:820px){.offer{grid-template-columns:1fr;gap:28px}}
+.offer-meta .num{
+  font-family:var(--mono);font-size:13px;color:var(--brass);letter-spacing:.14em;
+  display:block;margin-bottom:14px;
+}
+.offer-meta h3{
+  font-family:var(--display);font-weight:500;font-size:clamp(26px,3.4vw,36px);
+  line-height:1.15;
+}
+.offer-meta .fee{
+  font-family:var(--mono);font-size:14px;color:var(--sage);
+  margin-top:16px;padding-top:16px;border-top:1px solid var(--buckram-3);
+}
+.offer-body p{color:var(--sage);margin-bottom:16px}
+.offer-body p strong{color:var(--paper);font-weight:600}
+.offer-body ul{list-style:none;margin-top:8px}
+.offer-body li{
+  padding:10px 0 10px 26px;position:relative;color:var(--sage);
+  border-bottom:1px solid var(--buckram-2);font-size:15.5px;
+}
+.offer-body li::before{
+  content:"·";position:absolute;left:6px;color:var(--brass);
+  font-weight:700;
+}
+
+/* ---------- process ---------- */
+.process{padding:90px 0;border-top:1px solid var(--buckram-3)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;background:var(--buckram-3)}
+.step{background:var(--buckram-2);padding:34px 28px}
+.step .k{font-family:var(--mono);font-size:12px;color:var(--brass);letter-spacing:.16em;text-transform:uppercase}
+.step h4{font-family:var(--display);font-size:22px;font-weight:500;margin:12px 0 10px}
+.step p{font-size:15px;color:var(--sage)}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+
+/* ---------- podcast ---------- */
+.podcast{padding:70px 0;border-top:1px solid var(--buckram-3)}
+.pod-in{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+}
+.pod-in h3{font-family:var(--display);font-size:clamp(24px,3vw,32px);font-weight:500;max-width:560px;line-height:1.2}
+.pod-in h3 em{color:var(--brass)}
+.pod-in p{color:var(--sage);max-width:560px;margin-top:10px}
+
+/* ---------- operator ---------- */
+.operator{padding:90px 0;border-top:1px solid var(--buckram-3)}
+.cred{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;background:var(--buckram-3)}
+.cred article{background:var(--buckram-2);padding:30px 26px}
+.cred .k{font-family:var(--mono);font-size:11.5px;color:var(--sage-dim);letter-spacing:.14em;text-transform:uppercase}
+.cred h4{font-family:var(--display);font-size:19px;font-weight:500;margin:10px 0 8px}
+.cred p{font-size:14.5px;color:var(--sage)}
+@media(max-width:900px){.cred{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.cred{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+.contact{padding:90px 0 100px;border-top:1px solid var(--buckram-3)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;margin-top:40px}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr}}
+.contact-info p{color:var(--sage);margin-bottom:22px}
+.contact-info .row{
+  font-family:var(--mono);font-size:14px;margin-bottom:14px;
+  display:flex;gap:14px;
+}
+.contact-info .row span{color:var(--sage-dim);min-width:56px}
+.contact-info a{color:var(--paper);text-decoration:none;border-bottom:1px solid var(--brass)}
+form{display:grid;gap:16px}
+.field{display:grid;gap:6px}
+label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-dim)}
+input,select,textarea{
+  background:var(--buckram-2);border:1px solid var(--buckram-3);
+  color:var(--paper);font-family:var(--body);font-size:15px;
+  padding:13px 14px;border-radius:2px;width:100%;
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--brass);outline-offset:0;border-color:var(--brass)}
+textarea{min-height:120px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:620px){.form-row{grid-template-columns:1fr}}
+form .btn{border:none;cursor:pointer;justify-self:start}
+.form-note{font-size:13px;color:var(--sage-dim)}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--buckram-3);padding:34px 0;
+  font-family:var(--mono);font-size:12.5px;color:var(--sage-dim);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">mattervalue<span>.ai</span></a>
+    <ul class="nav-links">
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#schedule">Fee schedule</a></li>
+      <li><a href="#operator">Operator</a></li>
+      <li><a href="#podcast">Podcast</a></li>
+      <li><a class="nav-cta" href="#contact">Start an engagement</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">AI for law firms · Fixed fee · One operator</span>
+    <h1>Operator judgment, delivered at <em>software speed.</em></h1>
+    <p>MatterValue packages twenty-five years of law firm operating experience into fixed-fee products, a standing advisory retainer, and the Sovereign Reasoning coaching system. The AI does the labor. The operator does the judgment. You never pay for a consultant's calendar.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#schedule">See the fee schedule →</a>
+      <a class="btn btn-ghost" href="#thesis">Why this model</a>
+    </div>
+    <div class="hero-note">NO EMBEDDED TEAMS · NO DISCOVERY-CALL DANCE · NO THEATER</div>
+  </div>
+</header>
+
+<section class="thesis" id="thesis">
+  <div class="wrap reveal">
+    <span class="eyebrow">The thesis</span>
+    <h2>The consulting model is the thing <em>AI kills first.</em></h2>
+    <div class="thesis-grid">
+      <div>
+        <p>Every "AI for legal" consultancy sells you the same product: bodies and weeks. A diagnostic that takes a month. An implementation team that embeds for a quarter. A deck at the end. You are paying professional-services rates for work that AI now does in days — sold to you by people advising you to adopt AI.</p>
+        <p><strong>The irony is the opportunity.</strong> When the analysis, the drafting, the policy work, and the workflow builds are AI-run, what you're actually buying is judgment: knowing which answer is right for a law firm, which workflow survives partner pushback, and which vendor is selling vapor.</p>
+      </div>
+      <div>
+        <p>So MatterValue is built the way we tell firms to build: <strong>AI does the labor, the operator supplies the judgment, and the price is fixed.</strong> A diagnostic in five business days, not two weeks of hallway interviews. Governance packs and prompt libraries as products, not billable projects. Advisory as a standing relationship, not a proposal cycle.</p>
+        <p>One operator who has sat in the partnership meeting, carried the P&L, signed the vendor checks, and runs a multi-state firm right now. That doesn't scale by hiring associates. It scales by productizing — which is exactly what your firm should be doing too. Consider this site the demo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="schedule" id="schedule">
+  <div class="wrap reveal">
+    <span class="eyebrow">Engagements</span>
+    <h2>Five offers. Fixed fees. <em>On the record.</em></h2>
+    <p class="lede">Published pricing, because procurement games waste everyone's time. Every fee below is flat or a stated retainer. If your matter doesn't fit one of these, it probably isn't ours to take.</p>
+
+    <div class="sheet">
+      <div class="sheet-head">
+        <div>
+          <h3>Schedule of Fees &amp; Engagements</h3>
+          <div class="sub">MatterValue.ai · Effective 2026</div>
+        </div>
+        <div class="stamp">Fixed Fee · No Hourly</div>
+      </div>
+
+      <a class="line-item" href="#advisory">
+        <span class="li-num">01</span>
+        <span>
+          <span class="li-name">Standing Advisory Retainer<span class="li-flag">Flagship</span></span>
+          <span class="li-desc">A second brain for Managing Partners, COOs, and CIOs. Continuous access, monthly working sessions, board-level briefings.</span>
+        </span>
+        <span class="li-fee">$7,500 / mo<small>quarterly commitment</small></span>
+      </a>
+
+      <a class="line-item" href="#diagnostic">
+        <span class="li-num">02</span>
+        <span>
+          <span class="li-name">AI Readiness Diagnostic</span>
+          <span class="li-desc">Structured intake, AI-run analysis of your tools, data, and economics — operator-reviewed written assessment in five business days.</span>
+        </span>
+        <span class="li-fee">$18,500<small>flat · 5 business days</small></span>
+      </a>
+
+      <a class="line-item" href="#library">
+        <span class="li-num">03</span>
+        <span>
+          <span class="li-name">The Product Library</span>
+          <span class="li-desc">Governance &amp; policy packs, prompt libraries, ABA 512 disclosure language, workflow playbooks. Buy the artifact, not the project.</span>
+        </span>
+        <span class="li-fee">from $2,500<small>per pack · licensed to your firm</small></span>
+      </a>
+
+      <a class="line-item" href="#coaching">
+        <span class="li-num">04</span>
+        <span>
+          <span class="li-name">Sovereign Reasoning Coaching</span>
+          <span class="li-desc">Career architecture for partners and senior associates in an industry being rewritten. Cohorts and limited 1:1 seats.</span>
+        </span>
+        <span class="li-fee">$3,500 / seat<small>cohort · 1:1 from $2,500/mo</small></span>
+      </a>
+
+      <a class="line-item" href="#gtm">
+        <span class="li-num">05</span>
+        <span>
+          <span class="li-name">Legal Tech GTM Counsel<span class="li-flag">Selective</span></span>
+          <span class="li-desc">Buyer-side advisory for founders and CROs selling into law firms. By application; capacity is deliberately limited.</span>
+        </span>
+        <span class="li-fee">from $10,000<small>by application</small></span>
+      </a>
+
+      <div class="sheet-foot">
+        <span>All engagements begin with a 30-minute call. Free, and we'll tell you if we're not the right fit.</span>
+        <span>No hourly billing. Ever.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="offers">
+  <section class="offer wrap reveal" id="advisory">
+    <div class="offer-meta">
+      <span class="num">01 / FLAGSHIP</span>
+      <h3>Standing Advisory Retainer</h3>
+      <div class="fee">$7,500 / month · quarterly commitment · limited seats</div>
+    </div>
+    <div class="offer-body">
+      <p>For Managing Partners, COOs, and CIOs who need <strong>operator-to-operator counsel on tap</strong> — not a project, a relationship. You're navigating AI strategy, compensation restructuring, MSO and PE-readiness questions, vendor decisions, and partner politics simultaneously. Pattern-match against someone who has lived all of it.</p>
+      <ul>
+        <li>Continuous asynchronous access — send the memo, the deck, the vendor contract; get a straight answer</li>
+        <li>Two working sessions per month, agenda set by what's actually on your desk</li>
+        <li>Quarterly board-level briefing on AI risk and opportunity, written for your partnership</li>
+        <li>Standing vendor evaluation — Harvey, CoCounsel, Spellbook, and whoever pitched you this week</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="offer wrap reveal" id="diagnostic">
+    <div class="offer-meta">
+      <span class="num">02 / FRONT DOOR</span>
+      <h3>AI Readiness Diagnostic</h3>
+      <div class="fee">$18,500 flat · delivered in 5 business days</div>
+    </div>
+    <div class="offer-body">
+      <p>The two-week embedded diagnostic is dead — we killed ours. A structured intake and secure document review feed an <strong>AI-run analysis of your tools, workflows, and practice economics</strong>, and every finding is operator-reviewed before it reaches you. You get the same honest written assessment, in a fifth of the time, at a fixed price.</p>
+      <ul>
+        <li>Where AI creates revenue, where it cuts cost, and where it threatens you — ranked, with ROI modeling</li>
+        <li>Gap analysis against ABA Opinion 512 and your existing governance posture</li>
+        <li>A prioritized ship list: what to build first and what to ignore, with vendor recommendations</li>
+        <li>One working session to pressure-test the findings with your leadership</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="offer wrap reveal" id="library">
+    <div class="offer-meta">
+      <span class="num">03 / PRODUCTS</span>
+      <h3>The Product Library</h3>
+      <div class="fee">From $2,500 per pack · licensed firm-wide · updated as the rules change</div>
+    </div>
+    <div class="offer-body">
+      <p>The artifacts every firm needs are 90% identical from firm to firm. You should not fund a consulting project to receive them. <strong>Buy the finished product, adapt the last 10%</strong> — each pack ships with a working session to localize it to your firm.</p>
+      <ul>
+        <li><strong>Governance &amp; Policy Pack</strong> — firm AI policy, acceptable-use standards, ABA 512 alignment, incident response ($4,500)</li>
+        <li><strong>Prompt Library &amp; Training Kit</strong> — practice-group prompt libraries with citation-verification workflow and attorney training curriculum ($3,500)</li>
+        <li><strong>Client Disclosure Pack</strong> — engagement letter AI language, client consent frameworks, RFP response language ($2,500)</li>
+        <li><strong>Workflow Playbooks</strong> — intake, drafting, review, and KM workflows for ProLaw, NetDocs, and iManage shops ($3,500 each)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="offer wrap reveal" id="coaching">
+    <div class="offer-meta">
+      <span class="num">04 / COACHING</span>
+      <h3>Sovereign Reasoning Coaching</h3>
+      <div class="fee">Cohorts $3,500/seat · six weeks · 1:1 from $2,500/mo, limited seats</div>
+    </div>
+    <div class="offer-body">
+      <p>Built on the <a href="https://sovereignreasoning.com" style="color:var(--paper);border-bottom:1px solid var(--brass);text-decoration:none">Sovereign Reasoning System</a>. AI is rewriting the economics underneath the partnership track — origination, leverage, the value of a book. <strong>Seven for seven placing senior associates into partnership.</strong> The framework now runs as a structured six-week cohort, so the price of admission is no longer a bespoke engagement.</p>
+      <ul>
+        <li>Six-week cohorts for senior associates and new partners: positioning, BD systems, AI-era practice economics</li>
+        <li>1:1 engagements reserved for practice group leaders and partners with P&amp;L ownership</li>
+        <li>Partnership-track architecture: the case, the sponsors, the timing, the numbers</li>
+        <li>Personal brand and AI-era positioning that doesn't read like everyone else's LinkedIn</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="offer wrap reveal" id="gtm">
+    <div class="offer-meta">
+      <span class="num">05 / SELECTIVE</span>
+      <h3>Legal Tech GTM Counsel</h3>
+      <div class="fee">From $10,000 · by application · conflicts cleared before engagement</div>
+    </div>
+    <div class="offer-body">
+      <p>For founders and CROs trying to crack the law firm market. <strong>I am your buyer — I have been for twenty-five years</strong>, at Holland &amp; Hart, Orrick, Gibson Dunn, and now as a sitting COO who signs the checks. Most legal industry advisors have never moved budget. Capacity here is deliberately small and every engagement is conflict-checked first.</p>
+      <ul>
+        <li>Positioning, messaging, and ICP refinement for the legal vertical</li>
+        <li>Pricing and procurement readiness for AmLaw and mid-market firms</li>
+        <li>Buyer-side teardown of your deck, your pilot structure, and your competitive story</li>
+        <li>Design partner introductions where genuine fit exists</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<section class="process">
+  <div class="wrap reveal">
+    <span class="eyebrow">How it works</span>
+    <h2>Pick. Ship. <em>Compound.</em></h2>
+    <p class="lede">The old model was phases and quarters. The new model is a product catalog and a standing relationship.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="k">Step 01</span>
+        <h4>Pick from the schedule</h4>
+        <p>Fixed fee, published price, defined deliverable. A thirty-minute call confirms fit — and we'll say so plainly if the answer is no.</p>
+      </div>
+      <div class="step">
+        <span class="k">Step 02</span>
+        <h4>AI runs, operator reviews</h4>
+        <p>The analysis, drafting, and build work is AI-executed against frameworks refined in production at real firms. Nothing ships without operator sign-off. Days, not quarters.</p>
+      </div>
+      <div class="step">
+        <span class="k">Step 03</span>
+        <h4>Compound on retainer</h4>
+        <p>Most clients graduate to the standing advisory. The products get you moving; the relationship keeps you ahead of a market that doesn't slow down.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="podcast" id="podcast">
+  <div class="wrap pod-in reveal">
+    <div>
+      <span class="eyebrow">On the air</span>
+      <h3><em>Is That Even Legal?</em> — where the legal industry thinks out loud.</h3>
+      <p>The podcast Paul builds with attorney Bob Sewell — AI liability, legal ethics, and how the law actually works, in plain language. It's also where much of the thinking behind MatterValue gets pressure-tested in public.</p>
+    </div>
+    <a class="btn btn-ghost" href="https://www.evenlegal.com" target="_blank" rel="noopener">Listen to the show →</a>
+  </div>
+</section>
+
+<section class="operator" id="operator">
+  <div class="wrap reveal">
+    <span class="eyebrow">The operator</span>
+    <h2>Paul Ward has <em>actually done this.</em></h2>
+    <p class="lede">Most "AI for legal" consultants have never sat in a partnership meeting, closed an origination, or carried a P&amp;L. Paul has done all three — and built the AI programs underneath them.</p>
+    <div class="cred">
+      <article>
+        <span class="k">Founder</span>
+        <h4>Co-founder, Law.com</h4>
+        <p>Built and sold the leading legal industry media platform to ALM. Helped define how the legal industry talks to itself online.</p>
+      </article>
+      <article>
+        <span class="k">AmLaw 200</span>
+        <h4>CIO, Holland &amp; Hart</h4>
+        <p>Led technology and a major AI initiative. Practice group AI implementation drove a 30% profitability increase.</p>
+      </article>
+      <article>
+        <span class="k">In production</span>
+        <h4>COO, multi-state law firm</h4>
+        <p>Currently operating a firm: technology, marketing, HR, finance, vendors, strategy. Living the work, not theorizing it.</p>
+      </article>
+      <article>
+        <span class="k">Credential</span>
+        <h4>MIT Sloan, AI</h4>
+        <p>Formal training behind the operating experience. Conversant in the technology underneath the buzzwords.</p>
+      </article>
+      <article>
+        <span class="k">Product side</span>
+        <h4>Board member, Fenix.ai</h4>
+        <p>Active in the legal AI ecosystem from the builder's seat. Sees what's coming before it's a deck on your desk.</p>
+      </article>
+      <article>
+        <span class="k">Coach &amp; author</span>
+        <h4>Sovereign Reasoning System</h4>
+        <p>Author of "We Three Kings &amp; Queens." 7-for-7 record placing senior associates into partnership.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap reveal">
+    <span class="eyebrow">Start an engagement</span>
+    <h2>Tell us what's on <em>your desk.</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>No discovery-call dance, no nurture sequence. Name the engagement you're considering — or describe the problem and we'll point you at the right one. If we can help, we'll say so. If we can't, we'll say that too.</p>
+        <div class="row"><span>Phone</span><a href="tel:+14802366669">+1 (480) 236-6669</a></div>
+        <div class="row"><span>Email</span><a href="mailto:paul@paulward.pro">paul@paulward.pro</a></div>
+        <div class="row"><span>Base</span><span style="color:var(--paper)">Scottsdale, Arizona · engagements nationwide</span></div>
+      </div>
+      <form id="inquiry" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-firm">Firm / company</label>
+            <input id="f-firm" name="firm" type="text" autocomplete="organization">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-int">Engagement of interest</label>
+            <select id="f-int" name="interest">
+              <option>Standing Advisory Retainer</option>
+              <option>AI Readiness Diagnostic</option>
+              <option>Product Library</option>
+              <option>Sovereign Reasoning Coaching</option>
+              <option>Legal Tech GTM Counsel</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-msg">What's on your desk?</label>
+          <textarea id="f-msg" name="message" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send inquiry →</button>
+        <p class="form-note">We respond within one business day. Your information stays with us — no lists, no sequences, no nonsense.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 MatterValue.ai · All rights reserved</span>
+    <span>Built the way we tell firms to build.</span>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Form: opens a prefilled email. Swap this handler for Formspree/Netlify if preferred.
+document.getElementById('inquiry').addEventListener('submit',function(ev){
+  ev.preventDefault();
+  const f = ev.target;
+  if(!f.name.value || !f.email.value || !f.message.value){
+    f.reportValidity ? f.reportValidity() : alert('Name, email, and message are required.');
+    if(!f.checkValidity()) return;
+  }
+  const subject = encodeURIComponent('MatterValue inquiry — ' + f.interest.value);
+  const body = encodeURIComponent(
+    'Name: ' + f.name.value + '\n' +
+    'Firm: ' + (f.firm.value || '—') + '\n' +
+    'Email: ' + f.email.value + '\n' +
+    'Engagement: ' + f.interest.value + '\n\n' +
+    f.message.value
+  );
+  window.location.href = 'mailto:paul@paulward.pro?subject=' + subject + '&body=' + body;
+});
+</script>
+</body>
+</html>
