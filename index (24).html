@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatterValue.ai — The AI-run marketing department for law firms</title>
+<meta name="description" content="An AI marketing engine with senior judgment on top. Your firm's entire marketing function. Less than half the cost of the loaded hire, per term.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E120D;
+  --paper:#FFFFFF;
+  --green:#4CBB17;
+  --green-ink:#2F8A12;
+  --green-wash:#EAF6E4;
+  --green-pill:#DDF0D3;
+  --gray:#5B635A;
+  --soft:#F7F8F5;
+  --line:#E7EAE3;
+  --dark:#0E120D;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  color:var(--ink);background:var(--paper);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.container{max-width:1180px;margin:0 auto;padding:0 28px;}
+h1,h2,h3{font-family:'Archivo',sans-serif;}
+
+/* ---------- pills (the design system anchor) ---------- */
+.pill{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 13px;border-radius:99px;white-space:nowrap;
+}
+.pill.live{background:var(--green-pill);color:var(--green-ink);}
+.pill.road{background:var(--soft);color:var(--gray);}
+.pill.dark{background:#1C2418;color:var(--green);}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:currentColor;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.pill.live .dot{animation:pulse 2.2s ease-in-out infinite;}
+@media (prefers-reduced-motion: reduce){.pill.live .dot{animation:none;}}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;}
+.wordmark{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;cursor:pointer;}
+.mark{width:24px;height:24px;position:relative;flex-shrink:0;}
+.mark::before{content:"";position:absolute;inset:0;background:var(--green);clip-path:polygon(0 0,100% 0,50% 55%);}
+.mark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;background:var(--green);clip-path:polygon(0 100%,100% 100%,100% 0,50% 78%,0 0);}
+.tabs{display:flex;gap:4px;}
+.tab{font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;padding:9px 16px;cursor:pointer;border:none;background:none;color:var(--gray);text-transform:uppercase;border-bottom:3px solid transparent;}
+.tab:hover{color:var(--ink);}
+.tab.active{color:var(--ink);border-bottom-color:var(--green);}
+.nav-cta{font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;background:var(--ink);color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;text-transform:uppercase;}
+.nav-cta:hover{background:var(--green-ink);}
+
+.view{display:none;}
+.view.active{display:block;}
+.eyebrow{font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-ink);margin-bottom:20px;}
+.kicker{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(30px,4.2vw,48px);line-height:1.05;letter-spacing:-.025em;max-width:820px;}
+.kicker em{font-weight:800;}
+.section-sub{margin-top:18px;max-width:700px;font-size:18px;color:var(--gray);}
+
+/* ---------- hero ---------- */
+.hero{padding:80px 0 88px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
+.hero h1{font-weight:900;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:-.03em;}
+.hero h1 em{font-weight:800;}
+.hero h1 .hl{box-shadow:inset 0 -0.16em 0 var(--green);}
+.hero-sub{margin-top:24px;font-size:20px;font-weight:500;max-width:520px;}
+.hero-sub b{font-weight:800;}
+.hero-ctas{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn{font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;letter-spacing:.03em;padding:15px 28px;border-radius:8px;text-decoration:none;display:inline-block;transition:all .15s;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:var(--green-ink);}
+.btn-ghost{border:2px solid var(--ink);color:var(--ink);}
+.btn-ghost:hover{background:var(--ink);color:#fff;}
+.hero-fine{margin-top:26px;font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);}
+.hero-fine b{color:var(--green-ink);}
+
+/* engine card — the signature */
+.engine-card{
+  border:1px solid var(--line);border-radius:16px;background:#fff;
+  box-shadow:0 24px 60px -32px rgba(14,18,13,.25);overflow:hidden;
+}
+.engine-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 22px;background:var(--dark);color:#fff;
+}
+.engine-head .t{font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;}
+.engine-row{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 22px;border-top:1px solid var(--line);
+}
+.engine-row:first-of-type{border-top:none;}
+.engine-row .task{font-size:15px;font-weight:600;}
+.engine-row .task span{display:block;font-size:12.5px;color:var(--gray);font-weight:500;margin-top:2px;}
+.engine-foot{
+  padding:14px 22px;background:var(--green-wash);border-top:1px solid var(--line);
+  font-size:13px;color:var(--green-ink);font-weight:700;font-family:'Archivo',sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;
+}
+.gate-icon{width:14px;height:14px;border:2.5px solid var(--green-ink);border-radius:50%;position:relative;flex-shrink:0;}
+.gate-icon::after{content:"";position:absolute;left:3px;top:0px;width:4px;height:7px;border:solid var(--green-ink);border-width:0 2.5px 2.5px 0;transform:rotate(40deg);}
+
+/* ---------- problem ---------- */
+.problem{padding:88px 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.problem-body{margin-top:24px;max-width:660px;font-size:18px;}
+.problem-body p{margin-bottom:14px;}
+.stat-strip{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 26px;}
+.stat .n{font-family:'Archivo',sans-serif;font-weight:900;font-size:40px;letter-spacing:-.02em;line-height:1;}
+.stat .n span{color:var(--green-ink);}
+.stat .l{margin-top:10px;font-size:14px;color:var(--gray);line-height:1.5;}
+
+/* ---------- engine (how it works) ---------- */
+.system{padding:92px 0;}
+.sys-grid{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.sys-card{border:1px solid var(--line);border-radius:14px;padding:30px 28px;background:#fff;position:relative;}
+.sys-card .step{
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:13px;color:var(--green-ink);
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;
+}
+.sys-card h3{font-weight:800;font-size:21px;letter-spacing:-.01em;margin-bottom:10px;}
+.sys-card p{font-size:15.5px;color:var(--gray);}
+.sys-card p b{color:var(--ink);font-weight:700;}
+.sys-card.gated{background:var(--dark);border-color:var(--dark);color:#fff;}
+.sys-card.gated .step{color:var(--green);}
+.sys-card.gated p{color:#C9D1C5;}
+.sys-card.gated p b{color:var(--green);}
+
+/* ---------- fork ---------- */
+.fork{padding:92px 0;background:var(--dark);color:#F2F5EF;}
+.fork .eyebrow{color:var(--green);}
+.fork h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;line-height:1.06;max-width:820px;}
+.fork-grid{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.fork-card{border:1px solid #2A2F28;border-radius:16px;padding:34px 32px;background:#141912;}
+.fork-card.mv{border-color:var(--green);background:#131A0E;}
+.fork-card h3{font-weight:800;font-size:21px;}
+.fork-card .price{font-family:'Archivo',sans-serif;font-weight:900;font-size:44px;letter-spacing:-.02em;margin:16px 0 4px;}
+.fork-card.mv .price{color:var(--green);}
+.fork-card .per{font-size:12.5px;color:#9BA598;font-family:'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;}
+.fork-card ul{list-style:none;margin-top:22px;}
+.fork-card li{padding:11px 0;border-top:1px solid #232823;font-size:15.5px;color:#C9D1C5;line-height:1.5;}
+.fork-card.mv li{border-top-color:#22301A;}
+.fork-card li b{color:#fff;font-weight:700;}
+.fork-card.mv li b{color:var(--green);}
+.fork-note{margin-top:26px;font-size:15px;color:#9BA598;max-width:720px;}
+
+/* ---------- what you get ---------- */
+.getit{padding:92px 0;border-bottom:1px solid var(--line);}
+.getit-grid{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.get-card{border:1px solid var(--line);border-radius:14px;padding:32px 30px;}
+.get-card h3{font-weight:800;font-size:20px;display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+.get-card .tagline{font-size:13px;color:var(--gray);font-family:'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
+.get-card ul{list-style:none;}
+.get-card li{padding:12px 0;border-top:1px solid var(--line);font-size:16px;}
+.get-card li b{font-weight:700;}
+.coordinator-line{margin-top:20px;padding:32px 34px;background:var(--green-wash);border:1px solid #D8EFC0;border-radius:14px;}
+.coordinator-line p{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.28;letter-spacing:-.01em;max-width:860px;}
+
+/* ---------- vision ---------- */
+.vision{padding:92px 0;border-bottom:1px solid var(--line);}
+.vtable{margin-top:44px;border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+.vrow{display:grid;grid-template-columns:1fr 150px;border-top:1px solid var(--line);}
+.vrow:first-child{border-top:none;}
+.vrow .vfn{padding:20px 26px;font-size:17px;}
+.vrow .vfn b{font-weight:700;}
+.vrow .vfn span{color:var(--gray);font-size:14.5px;display:block;margin-top:3px;}
+.vrow .vstat{display:flex;align-items:center;justify-content:center;background:var(--green-wash);}
+.vrow .vstat.road{background:var(--soft);}
+.vision-foot{margin-top:18px;font-size:14px;color:var(--gray);}
+
+/* ---------- credibility strip ---------- */
+.cred{padding:64px 0;border-bottom:1px solid var(--line);background:var(--soft);}
+.cred-line{
+  display:flex;flex-wrap:wrap;gap:12px 36px;align-items:center;justify-content:center;
+  font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--ink);
+}
+.cred-line .sep{color:#C6CCC1;}
+.cred-caption{text-align:center;margin-top:14px;font-size:14px;color:var(--gray);}
+
+/* ---------- CTA ---------- */
+.cta{padding:96px 0;}
+.cta-box{background:var(--dark);border-radius:20px;padding:64px 56px;color:#fff;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;}
+.cta-box h2{font-weight:900;font-size:clamp(30px,4vw,46px);line-height:1.02;letter-spacing:-.02em;}
+.cta-box h2 em{color:var(--green);font-weight:800;}
+.cta-box .sub{margin-top:18px;font-size:17px;color:#C9D1C5;max-width:480px;}
+.cta-actions{display:flex;flex-direction:column;gap:14px;}
+.btn-green{background:var(--green);color:var(--ink);text-align:center;font-size:16px;border-radius:8px;}
+.btn-green:hover{background:#fff;}
+.btn-outline{border:2px solid #3A4038;color:#fff;text-align:center;border-radius:8px;}
+.btn-outline:hover{border-color:var(--green);color:var(--green);}
+.cta-contact{margin-top:8px;font-size:14px;color:#9BA598;text-align:center;}
+.cta-contact a{color:#C9D1C5;text-decoration:none;}
+.cta-contact a:hover{color:var(--green);}
+
+footer{padding:36px 0 48px;}
+.foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--gray);border-top:1px solid var(--line);padding-top:28px;}
+
+/* ---------- consulting ---------- */
+.c-hero{padding:88px 0 64px;border-bottom:1px solid var(--line);}
+.c-hero h1{font-weight:900;font-size:clamp(34px,5.4vw,62px);line-height:1;letter-spacing:-.03em;max-width:860px;}
+.c-hero .sub{margin-top:24px;font-size:19px;max-width:640px;}
+.c-strap{margin-top:26px;font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);}
+.c-strap b{color:var(--green-ink);}
+.offers{padding:72px 0 40px;}
+.offer{display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:baseline;padding:30px 0;border-top:1px solid var(--line);}
+.offer:last-child{border-bottom:1px solid var(--line);}
+.offer .num{font-family:'Archivo',sans-serif;font-weight:900;font-size:22px;color:var(--green-ink);}
+.offer h3{font-weight:800;font-size:21px;letter-spacing:-.01em;}
+.offer .desc{margin-top:6px;font-size:15.5px;color:var(--gray);max-width:560px;}
+.offer .fee{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;white-space:nowrap;}
+.offer .fee span{display:block;font-weight:500;font-size:12px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+.c-note{padding:24px 0 88px;font-size:16px;color:var(--gray);max-width:720px;}
+.c-note b{color:var(--ink);}
+.c-note a{color:var(--green-ink);font-weight:700;text-decoration:none;}
+
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:44px;}
+  .sys-grid{grid-template-columns:1fr;}
+  .fork-grid,.getit-grid,.cta-box{grid-template-columns:1fr;}
+  .stat-strip{grid-template-columns:1fr;}
+  .offer{grid-template-columns:44px 1fr;}
+  .offer .fee{grid-column:2;}
+  .nav-cta{display:none;}
+  .tabs .tab{padding:9px 10px;font-size:12px;}
+  .vrow{grid-template-columns:1fr 120px;}
+}
+</style>
+</head>
+<body>
+<!-- ============ INTRO OVERLAY: Add brains, not headcount (delete this block to remove) ============ -->
+<style>
+#mvIntro{position:fixed;inset:0;z-index:999;background:#0A0D09;background-image:radial-gradient(120% 90% at 22% 18%, rgba(76,187,23,.16), transparent 62%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:1;transition:opacity .9s ease;cursor:pointer;}
+#mvIntro.gone{opacity:0;pointer-events:none;}
+#mvIntro .iw{width:100%;max-width:1080px;display:flex;flex-direction:column;gap:40px;}
+#mvIntro .itop{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;}
+#mvIntro h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(40px,7.5vw,88px);line-height:.92;letter-spacing:-.035em;margin:0;text-transform:uppercase;color:#F2F5EF;}
+#mvIntro h1 span{color:#4CBB17;}
+#mvIntro .ibrand{font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#6F7A6C;padding-bottom:10px;white-space:nowrap;}
+#mvIntro .igrid{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;position:relative;}
+#mvIntro .icol-l{padding-right:48px;} #mvIntro .icol-r{padding-left:48px;}
+#mvIntro .idiv{align-self:stretch;background:linear-gradient(180deg,transparent,#2A322A 22%,#2A322A 78%,transparent);}
+#mvIntro .ivs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:#0E120D;border:1px solid #2A322A;display:flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#8A9486;}
+#mvIntro .ihint{font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#556052;text-align:center;}
+@keyframes zapI{0%,72%,100%{opacity:1;}76%{opacity:.25;}80%{opacity:1;}84%{opacity:.4;}88%{opacity:1;}}
+@media (max-width:760px){#mvIntro .icol-r,#mvIntro .idiv,#mvIntro .ivs{display:none;}#mvIntro .igrid{grid-template-columns:1fr;}#mvIntro .icol-l{padding-right:0;}#mvIntro .itop{flex-direction:column;align-items:flex-start;gap:12px;}}
+@media (prefers-reduced-motion: reduce){#mvIntro use{animation:none !important;}}
+</style>
+<div id="mvIntro" onclick="mvDismiss()">
+  <div class="iw">
+    <div class="itop">
+      <h1>Add brains,<br>not <span>headcount</span><sup style="font-size:.26em;vertical-align:super;color:#6F7A6C;letter-spacing:0;">&trade;</sup></h1>
+      <div class="ibrand">MatterValue</div>
+    </div>
+    <div class="igrid">
+      <div class="icol-l">
+        <svg viewBox="0 0 420 320" style="width:100%;height:auto;display:block;overflow:visible;" aria-label="Sketched brains with lightning">
+          <defs>
+            <filter id="iRough" x="-14%" y="-14%" width="128%" height="128%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+            <filter id="iGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <g id="iBrain">
+              <path d="M60 10 C50 2 34 4 30 16 C18 16 10 26 15 37 C6 44 8 58 19 63 C19 78 32 88 46 84 C50 92 60 92 60 84 C60 92 70 92 74 84 C88 88 101 78 101 63 C112 58 114 44 105 37 C110 26 102 16 90 16 C86 4 70 2 60 10 Z" fill="none" stroke="#7C857A" stroke-width="2.6" stroke-linejoin="round"/>
+              <path d="M60 12 L60 84 M30 16 C40 22 38 32 46 34 M15 37 C28 38 34 46 30 54 M19 63 C30 60 40 66 42 74 M90 16 C80 22 82 32 74 34 M105 37 C92 38 86 46 90 54 M101 63 C90 60 80 66 78 74" fill="none" stroke="#4A524A" stroke-width="2" stroke-linecap="round"/>
+              <path d="M66 26 L47 56 L58 56 L52 78 L76 46 L64 46 Z" fill="#4CBB17" filter="url(#iGlow)"/>
+            </g>
+            <g id="iFig">
+              <circle cx="20" cy="10" r="8.4" fill="none" stroke="#3E463D" stroke-width="2.6"/>
+              <path d="M20 19 L20 44 M6 27 L34 27 M20 44 L9 64 M20 44 L31 64" fill="none" stroke="#3E463D" stroke-width="2.6" stroke-linecap="round"/>
+            </g>
+          </defs>
+          <g filter="url(#iRough)">
+            <use href="#iBrain" transform="translate(4,18) rotate(-4,60,50)" style="animation:zapI 3.1s infinite;"/>
+            <use href="#iBrain" transform="translate(146,4) rotate(3,60,50)" style="animation:zapI 3.7s .4s infinite;"/>
+            <use href="#iBrain" transform="translate(288,22) rotate(-2,60,50)" style="animation:zapI 4.3s .9s infinite;"/>
+            <use href="#iBrain" transform="translate(-6,168) rotate(5,60,50)" style="animation:zapI 3.4s 1.4s infinite;"/>
+            <use href="#iBrain" transform="translate(140,158) rotate(-3,60,50)" style="animation:zapI 4.9s .2s infinite;"/>
+            <use href="#iBrain" transform="translate(284,176) rotate(2,60,50)" style="animation:zapI 3.9s 2s infinite;"/>
+          </g>
+        </svg>
+      </div>
+      <div class="idiv"></div>
+      <div class="icol-r">
+        <svg viewBox="0 0 420 320" style="width:100%;height:auto;display:block;overflow:visible;opacity:.5;" aria-label="Crowd of stick figures">
+          <g filter="url(#iRough)">
+            <use href="#iFig" transform="translate(2,6)"/><use href="#iFig" transform="translate(60,2)"/><use href="#iFig" transform="translate(118,8)"/><use href="#iFig" transform="translate(176,3)"/><use href="#iFig" transform="translate(234,7)"/><use href="#iFig" transform="translate(292,2)"/><use href="#iFig" transform="translate(350,6)"/>
+            <use href="#iFig" transform="translate(6,86)"/><use href="#iFig" transform="translate(64,82)"/><use href="#iFig" transform="translate(122,88)"/><use href="#iFig" transform="translate(180,83)"/><use href="#iFig" transform="translate(238,87)"/><use href="#iFig" transform="translate(296,82)"/><use href="#iFig" transform="translate(354,86)"/>
+            <use href="#iFig" transform="translate(2,166)"/><use href="#iFig" transform="translate(60,162)"/><use href="#iFig" transform="translate(118,168)"/><use href="#iFig" transform="translate(176,163)"/><use href="#iFig" transform="translate(234,167)"/><use href="#iFig" transform="translate(292,162)"/><use href="#iFig" transform="translate(350,166)"/>
+            <use href="#iFig" transform="translate(6,246)"/><use href="#iFig" transform="translate(64,242)"/><use href="#iFig" transform="translate(122,248)"/><use href="#iFig" transform="translate(180,243)"/><use href="#iFig" transform="translate(238,247)"/><use href="#iFig" transform="translate(296,242)"/><use href="#iFig" transform="translate(354,246)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="ivs">vs</div>
+    </div>
+    <div class="ihint">Tap anywhere to enter</div>
+  </div>
+</div>
+<script>
+(function(){
+  var seen = false;
+  try { seen = sessionStorage.getItem('mvIntroSeen') === '1'; } catch(e){}
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var el = document.getElementById('mvIntro');
+  if (seen || reduce) { el.parentNode.removeChild(el); return; }
+  document.body.style.overflow = 'hidden';
+  window.mvDismiss = function(){
+    el.classList.add('gone');
+    document.body.style.overflow = '';
+    try { sessionStorage.setItem('mvIntroSeen','1'); } catch(e){}
+    setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, 950);
+  };
+  setTimeout(window.mvDismiss, 3600);
+})();
+</script>
+<!-- ============ END INTRO OVERLAY ============ -->
+
+
+<nav>
+  <div class="container nav-inner">
+    <div class="wordmark" onclick="showView('marketing')"><span class="mark"></span>MatterValue</div>
+    <div class="tabs">
+      <button class="tab active" id="tab-marketing" onclick="showView('marketing')">Marketing</button>
+      <button class="tab" id="tab-consulting" onclick="showView('consulting')">AI Consulting</button>
+      <button class="tab" id="tab-founder" onclick="showView('founder')">Founder</button>
+    </div>
+    <a href="#contact" class="nav-cta" onclick="showView('marketing')">Book a call</a>
+  </div>
+</nav>
+
+<!-- ================= MARKETING (HOME) ================= -->
+<div class="view active" id="view-marketing">
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">The AI-run marketing department for law firms</div>
+      <h1>Where <em class="hl">production</em> meets <em class="hl">judgment.</em></h1>
+      <p class="hero-sub">An AI engine runs your firm's entire marketing function. Senior legal marketing judgment sits on top. <b>Less than half the cost of the loaded hire, per term.</b></p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Book a call</a>
+        <a href="#fork" class="btn btn-ghost">See math for one hire</a>
+      </div>
+      <div class="hero-fine">No slop · No 18-month experiments · <b>A verdict in 180 days</b></div>
+    </div>
+    <div class="engine-card" aria-label="The MatterValue engine">
+      <div class="engine-head">
+        <span class="t">MatterValue Engine</span>
+        <span class="pill dark"><span class="dot"></span>Running</span>
+      </div>
+      <div class="engine-row">
+        <div class="task">Client alert — new AZ non-compete ruling<span>Drafted in your litigation group's voice</span></div>
+        <span class="pill live"><span class="dot"></span>Shipped</span>
+      </div>
+      <div class="engine-row">
+        <div class="task">Chambers submission — Commercial Litigation<span>Matter narratives assembled from your records</span></div>
+        <span class="pill live"><span class="dot"></span>In review</span>
+      </div>
+      <div class="engine-row">
+        <div class="task">14 partner bios refreshed<span>LinkedIn synced · AI-answer visibility optimized</span></div>
+        <span class="pill live"><span class="dot"></span>Shipped</span>
+      </div>
+      <div class="engine-row">
+        <div class="task">Q4 client acquisition strategy<span>Original ideation — this one's on us, not the machine</span></div>
+        <span class="pill road">Judgment layer</span>
+      </div>
+      <div class="engine-foot"><span class="gate-icon"></span>Nothing ships without senior review</div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="container">
+    <h2 class="kicker">You can't sell slop anymore. <em>The market won't buy it.</em></h2>
+    <div class="problem-body">
+      <p>And you can't pay six figures for someone to sign up for tables and push logos onto sponsorships.</p>
+      <p>Here's the bet you're about to make: a full-priced hire, 18 to 24 months to find out if it works. Then, more often than you'd like, you run the search again.</p>
+    </div>
+    <div class="stat-strip">
+      <div class="stat"><div class="n">1 <span>in</span> 3</div><div class="l">First-chair legal marketers made a career move within a single year (BTI Consulting, 300+ firms canvassed).</div></div>
+      <div class="stat"><div class="n">~$175<span>K</span></div><div class="l">What that $130K director posting really costs, loaded: benefits, taxes, software, and the recruiter's fee.</div></div>
+      <div class="stat"><div class="n">18<span>–</span>24<span> mo</span></div><div class="l">How long it takes to find out whether the hire worked. The market moves faster than your experiment.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="system">
+  <div class="container">
+    <div class="eyebrow">How the engine works</div>
+    <h2 class="kicker">AI does the labor. <em>Judgment does the gating.</em></h2>
+    <div class="sys-grid">
+      <div class="sys-card">
+        <div class="step">01 · The playbooks</div>
+        <h3>Codified legal marketing judgment</h3>
+        <p>Three decades of what works in law firm marketing — <b>written into systems, not trapped in someone's head.</b> The engine knows what a Chambers narrative needs, what partners will approve, and what clients ignore.</p>
+      </div>
+      <div class="sys-card">
+        <div class="step">02 · The engine</div>
+        <h3>Enterprise AI production</h3>
+        <p>Content, submissions, bios, campaigns, and analytics produced at machine speed on enterprise-grade AI. <b>Inside your systems where possible. Nothing trains on your data. Ever.</b></p>
+      </div>
+      <div class="sys-card gated">
+        <div class="step">03 · The gate</div>
+        <h3>Senior review, every time</h3>
+        <p>Nothing reaches a partner or a client without senior sign-off. <b>The machine accelerates. The judgment decides.</b> That's the difference between production and slop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fork" id="fork">
+  <div class="container">
+    <div class="eyebrow">The fork in front of you</div>
+    <h2>Two ways to fill the seat. <em>Only one of them has an end date.</em></h2>
+    <div class="fork-grid">
+      <div class="fork-card">
+        <h3>The hire</h3>
+        <div class="price">~$175K<span style="font-size:20px;">/yr</span></div>
+        <div class="per">Loaded cost · 18–24 month experiment</div>
+        <ul>
+          <li>One person, <b>no team</b>, twelve partners with twelve opinions</li>
+          <li>Six months to learn your firm before anything ships</li>
+          <li>Strategist, writer, designer, and CRM admin in one body</li>
+          <li>If it fails: severance, a recruiter fee, and <b>the search starts over</b></li>
+        </ul>
+      </div>
+      <div class="fork-card mv">
+        <h3>MatterValue</h3>
+        <div class="price">&lt; &frac12;</div>
+        <div class="per">The loaded cost of the hire ($175K/yr) · $75K per six-month term · Scoreboard verdict at day 180</div>
+        <ul>
+          <li>An AI engine that <b>never sleeps, never quits, never learns on your dime</b></li>
+          <li>Senior judgment gating every deliverable</li>
+          <li>Works inside your systems. <b>Nothing leaves your walls</b></li>
+          <li>Day 180 delivers <b>a verdict, on the calendar.</b> Renew on proof or part clean. No severance, no recruiter, no restart</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fork-note">Already have a department? Your team can deploy the engine too — it makes good marketers faster and frees your senior people for the work that needs them.</p>
+  </div>
+</section>
+
+<section class="getit">
+  <div class="container">
+    <div class="eyebrow">What you get</div>
+    <h2 class="kicker">Everything AI can do. <em>And the thing it can't.</em></h2>
+    <div class="getit-grid">
+      <div class="get-card">
+        <h3><span class="pill live" style="font-size:10px;">Machine speed</span></h3>
+        <div class="tagline">The fungible work, accelerated</div>
+        <ul>
+          <li>Content, alerts, and campaigns produced in <b>days, not quarters</b></li>
+          <li>Bios, practice pages, and pitch materials at volume</li>
+          <li>Analytics and reporting the partners will actually read</li>
+          <li>Enterprise AI only. <b>Nothing trains on your data.</b> Ever</li>
+        </ul>
+      </div>
+      <div class="get-card">
+        <h3><span class="pill dark" style="font-size:10px;">Original ideation</span></h3>
+        <div class="tagline">Where the judgment kicks in</div>
+        <ul>
+          <li>Thought-leading content that sounds like <b>your lawyers</b>, not a machine</li>
+          <li>Client acquisition strategies built for your actual market</li>
+          <li>Lateral hire suggestions you haven't considered</li>
+          <li>Offerings your competitors <b>haven't thought of yet</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="coordinator-line">
+      <p>Director-level judgment. Coordinator-level cost. That's not a discount — that's what happens when the production is machine speed.</p>
+    </div>
+  </div>
+</section>
+
+<section class="vision">
+  <div class="container">
+    <div class="eyebrow">The full department</div>
+    <h2 class="kicker">Every function a modern legal marketing department runs. <em>One relationship.</em></h2>
+    <p class="section-sub">We deliver against the whole map — live today through your engagement, with firm-branded tools on the roadmap as we grow together.</p>
+    <div class="vtable">
+      <div class="vrow"><div class="vfn"><b>Content &amp; thought leadership</b><span>Client alerts, articles, newsletters, bylines, webinar support</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Pitches, proposals &amp; RFPs</b><span>Pitch materials, proposal production, pursuit support</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Rankings &amp; directories</b><span>Chambers, Legal 500, Benchmark submissions and referee management</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Brand, website &amp; social</b><span>Positioning, bios, practice pages, lawyer-level LinkedIn</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>AI-answer visibility (GEO)</b><span>How ChatGPT, Claude, and Gemini describe your firm to buyers</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Campaigns, email &amp; events</b><span>Client development campaigns, list management, event support</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Marketing analytics &amp; budget</b><span>Spend audit, vendor rationalization, ROI reporting to the partnership</span></div><div class="vstat"><span class="pill live"><span class="dot"></span>Live</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Your firm-branded marketing app</b><span>One icon, your logo. Lawyers start every request there</span></div><div class="vstat road"><span class="pill road">Roadmap</span></div></div>
+      <div class="vrow"><div class="vfn"><b>Data bridges to your systems</b><span>CRM, experience, and DMS connections for compounding intelligence</span></div><div class="vstat road"><span class="pill road">Roadmap</span></div></div>
+    </div>
+    <p class="vision-foot">Live means delivered today, inside your engagement. Roadmap means it's being built with our first partner firms.</p>
+  </div>
+</section>
+
+<section class="cred">
+  <div class="container">
+    <div class="cred-line">
+      <span>30 years in law firm operations</span><span class="sep">·</span>
+      <span>Co-founder, Law.com</span><span class="sep">·</span>
+      <span>AmLaw 100 AI innovation</span><span class="sep">·</span>
+      <span>COO, CMO &amp; CIO experience, multi-state firms</span>
+    </div>
+    <p class="cred-caption">The judgment layer is run by operators who've done the work — not an agency learning your industry on your invoice.</p>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-box">
+      <div>
+        <h2>Twenty minutes. <em>We'll show you the math.</em></h2>
+        <p class="sub">What the seat really costs, what we'd charge, and what you'd see in the first ninety days — on your firm's own numbers. If we're not the right fit, we'll say so on the call.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:paul@mattervalue.ai?subject=Marketing%20engagement" id="bookBtn" class="btn btn-green">Book the call</a>
+        <a href="#" class="btn btn-outline" onclick="showView('consulting');return false;">Or explore AI consulting</a>
+        <p class="cta-contact"><a href="tel:+14802366669">+1 (480) 236-6669</a> · <a href="mailto:paul@mattervalue.ai">paul@mattervalue.ai</a><br>Scottsdale, Arizona · Engagements nationwide</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ================= AI CONSULTING ================= -->
+<div class="view" id="view-consulting">
+
+<section class="c-hero">
+  <div class="container">
+    <div class="eyebrow">AI for law firms · Fixed fee · One operator</div>
+    <h1>Operator judgment, delivered at <em>software speed.</em></h1>
+    <p class="sub">MatterValue packages decades of law firm operating experience into fixed-fee products, a standing advisory retainer, and the Sovereign Reasoning coaching system. The AI does the labor. The operator does the judgment. You never pay for a consultant's calendar.</p>
+    <div class="c-strap">No embedded teams · No discovery-call dance · <b>No theater</b></div>
+  </div>
+</section>
+
+<section class="offers">
+  <div class="container">
+    <div class="eyebrow">Schedule of fees &amp; engagements</div>
+    <h2 class="kicker">Five offers. Fixed fees. <em>On the record.</em></h2>
+    <div style="margin-top:40px;">
+      <div class="offer">
+        <div class="num">01</div>
+        <div><h3>Standing Advisory Retainer</h3><p class="desc">A second brain for Managing Partners, COOs, and CIOs. Continuous access, monthly working sessions, board-level briefings. Operator-to-operator counsel on tap — not a project, a relationship.</p></div>
+        <div class="fee">$7,500/mo<span>Quarterly commitment</span></div>
+      </div>
+      <div class="offer">
+        <div class="num">02</div>
+        <div><h3>AI Readiness Diagnostic</h3><p class="desc">Structured intake, AI-run analysis of your tools, data, and economics — operator-reviewed written assessment in five business days. The two-week embedded diagnostic is dead. We killed ours.</p></div>
+        <div class="fee">$18,500<span>Flat · 5 business days</span></div>
+      </div>
+      <div class="offer">
+        <div class="num">03</div>
+        <div><h3>The Product Library</h3><p class="desc">Governance &amp; policy packs, prompt libraries, ABA 512 disclosure language, workflow playbooks. Buy the artifact, not the project — each pack ships with a working session to localize it.</p></div>
+        <div class="fee">From $2,500<span>Per pack · Licensed to your firm</span></div>
+      </div>
+      <div class="offer">
+        <div class="num">04</div>
+        <div><h3>Sovereign Reasoning Coaching</h3><p class="desc">Career architecture for partners and senior associates in an industry being rewritten. Six-week cohorts and limited 1:1 seats. Seven for seven placing senior associates into partnership.</p></div>
+        <div class="fee">$3,500/seat<span>Cohort · 1:1 from $2,500/mo</span></div>
+      </div>
+      <div class="offer">
+        <div class="num">05</div>
+        <div><h3>Legal Tech GTM Counsel</h3><p class="desc">Buyer-side advisory for founders and CROs selling into law firms. Positioning, pricing, procurement readiness, and a buyer-side teardown of your deck. Conflicts cleared before engagement.</p></div>
+        <div class="fee">From $10,000<span>By application · Limited</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="c-note">
+  <div class="container">
+    <p><b>All engagements begin with a 30-minute call.</b> Free, and we'll tell you if we're not the right fit. No hourly billing. Ever. — <a href="mailto:paul@mattervalue.ai">paul@mattervalue.ai</a> · <a href="tel:+14802366669">+1 (480) 236-6669</a></p>
+  </div>
+</section>
+
+</div>
+
+<!-- ================= FOUNDER ================= -->
+<div class="view" id="view-founder">
+
+<section class="c-hero">
+  <div class="container">
+    <div class="eyebrow">Our founder</div>
+    <h1>Paul Ward</h1>
+    <p class="sub" style="color:var(--green-ink);font-style:italic;">MatterValue has been in motion for decades. AI brought it to the next level.</p>
+  </div>
+</section>
+
+<section style="padding:64px 0;">
+  <div class="container" style="display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start;">
+    <div style="font-size:17px;line-height:1.7;color:var(--ink);">
+      <p style="margin-bottom:22px;">With marketing chops from mega firms like Orrick and Gibson Dunn, to founding Law.com and selling it to ALM, Paul learned early the value of using technology to scale and economize law firm marketing.</p>
+      <p style="margin-bottom:22px;">For more than a decade he operated multiple firms' marketing departments or department functions, up to three firms simultaneously, leveraging technology. He was global head of PR for one firm while serving as CMO of another. At the same time.</p>
+      <p style="margin-bottom:22px;">In his most recent role at Davis Miles, PLLC, Paul was COO, CMO, and CIO simultaneously, leveraging technology. He helped grow the firm 36 percent in a five-year span. He knows how to get the most out of law firm roles.</p>
+      <p style="margin-bottom:22px;">With the advent of AI, Paul systematized those processes to do what he loves: level the playing field, so firms don't have to settle for an underqualified FTE when they can have sophisticated ideation and creation combined with rapid, efficient, accurate execution.</p>
+      <p style="font-weight:700;">That system is MatterValue.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="border:1px solid #CDE9BC;background:var(--green-wash);border-radius:14px;padding:20px 22px;">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;letter-spacing:-.02em;">3 firms</div>
+        <div style="font-size:13.5px;color:var(--gray);margin-top:4px;">Operated simultaneously: global head of PR at one while CMO of another.</div>
+      </div>
+      <div style="border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:20px 22px;">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;letter-spacing:-.02em;">MIT &middot; Tulane</div>
+        <div style="font-size:13.5px;color:var(--gray);margin-top:4px;">MIT certificate in AI Strategy. Master's certificate, Tulane University.</div>
+      </div>
+      <div style="border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:20px 22px;">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;letter-spacing:-.02em;">CMO &middot; CIO &middot; COO</div>
+        <div style="font-size:13.5px;color:var(--gray);margin-top:4px;">Decades of experience in the chairs law firms actually trust. Including 36% firm growth over five years.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="c-note">
+  <div class="container">
+    <p><b>Talk to Paul directly.</b> Every engagement starts and stays at the principal level. &mdash; <a href="mailto:paul@mattervalue.ai">paul@mattervalue.ai</a> &middot; <a href="tel:+14802366669">+1 (480) 236-6669</a></p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container foot-inner">
+    <span>© 2026 MatterValue.ai · All rights reserved</span>
+    <span>Built the way we tell firms to build.</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   BOOKING LINK — EDIT THIS ONE LINE
+   Paste your Microsoft Bookings or Calendly URL between the
+   quotes below. Until you do, the button falls back to email.
+   Example: const BOOKING_URL = "https://outlook.office.com/bookwithme/user/...";
+   ============================================================ */
+const BOOKING_URL = "";
+
+if (BOOKING_URL) {
+  const b = document.currentScript ? null : null;
+  window.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('bookBtn');
+    if (btn) { btn.href = BOOKING_URL; btn.target = "_blank"; btn.rel = "noopener"; }
+  });
+}
+
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+</script>
+</body>
+</html>
