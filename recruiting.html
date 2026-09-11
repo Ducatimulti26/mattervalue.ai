@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatterValue Placement: Legal recruiting, powered by the Sovereign Reasoning System</title>
+<meta name="description" content="Recruiters match resumes. We match trajectories. Fixed-fee legal placement built on three-dimensional matching, AI-speed market mapping, and senior judgment on every shortlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF8;
+    --ink:#000000;
+    --garnet:#7A1F2B;
+    --gold:#9A7B2D;
+    --quiet:#5a564f;
+    --rule:#d9d5cc;
+    --max:1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--garnet)}
+  a:focus-visible, button:focus-visible{outline:3px solid var(--garnet);outline-offset:3px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* ---------- top bar ---------- */
+  header{border-bottom:1px solid var(--rule)}
+  .bar{display:flex;align-items:baseline;justify-content:space-between;padding:20px 0;gap:16px;flex-wrap:wrap}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--ink);text-decoration:none}
+  .wordmark span{color:var(--garnet)}
+  nav a{font-size:.9rem;text-decoration:none;color:var(--ink);margin-left:22px}
+  nav a:hover{color:var(--garnet)}
+  nav a.cta{color:var(--garnet);font-weight:600}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 72px}
+  .kicker{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:1.1rem;margin-bottom:20px}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(2.4rem,6vw,4.4rem);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    max-width:19ch;
+  }
+  h1 em{font-style:italic;color:var(--garnet)}
+  .hero p.dek{max-width:56ch;margin-top:28px;font-size:1.15rem;color:var(--quiet)}
+  .hero p.dek strong{color:var(--ink)}
+  .hero-actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:600;font-size:1rem;
+    padding:14px 26px;border:1.5px solid var(--ink);color:var(--ink);background:transparent;
+    transition:background .15s,color .15s;
+  }
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.primary{background:var(--garnet);border-color:var(--garnet);color:#fff}
+  .btn.primary:hover{background:#5e1721;border-color:#5e1721}
+  .hero-note{margin-top:22px;font-size:.9rem;color:var(--quiet)}
+
+  /* ---------- sections ---------- */
+  section{padding:72px 0;border-top:1px solid var(--rule)}
+  h2{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.15;max-width:26ch;margin-bottom:18px;
+  }
+  h2 em{font-style:italic;color:var(--garnet)}
+  h2 em.sov{color:var(--gold)}
+  .lede{max-width:62ch;font-size:1.1rem;color:var(--quiet)}
+  .lede strong{color:var(--ink)}
+
+  /* problem stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:44px}
+  .stat b{display:block;font-family:'Fraunces',serif;font-weight:600;font-size:2.4rem;line-height:1;color:var(--garnet)}
+  .stat p{margin-top:10px;font-size:.92rem;color:var(--quiet);max-width:26ch}
+
+  /* three thrones */
+  .thrones{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border:1px solid var(--rule)}
+  .throne{padding:30px 26px}
+  .throne + .throne{border-left:1px solid var(--rule)}
+  .throne h3{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:1.35rem;color:var(--gold)}
+  .throne .role{font-size:.85rem;font-weight:600;color:var(--ink);margin-top:4px}
+  .throne p{margin-top:12px;font-size:.95rem;color:var(--quiet)}
+  .sov-credit{margin-top:22px;font-size:.95rem;color:var(--quiet);max-width:60ch}
+  .sov-credit a{color:var(--gold);font-weight:600}
+
+  /* engagement sequence */
+  .steps{margin-top:44px;counter-reset:step}
+  .step{
+    display:grid;grid-template-columns:64px 1fr;gap:24px;
+    padding:30px 0;border-top:1px solid var(--rule);counter-increment:step;
+  }
+  .step:last-child{border-bottom:1px solid var(--rule)}
+  .step::before{
+    content:counter(step,decimal-leading-zero);
+    font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;color:var(--garnet);
+  }
+  .step.gold::before{color:var(--gold)}
+  .step h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem}
+  .step p{margin-top:8px;color:var(--quiet);max-width:64ch}
+  .step p strong{color:var(--ink)}
+
+  /* fork */
+  .fork{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px;border:1px solid var(--rule)}
+  .fork-col{padding:34px 30px}
+  .fork-col + .fork-col{border-left:1px solid var(--rule)}
+  .fork-col.ours{background:#fff}
+  .fork-col h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem}
+  .fork-col .price{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;margin-top:10px}
+  .fork-col.theirs .price{color:var(--quiet)}
+  .fork-col.ours .price{color:var(--garnet)}
+  .fork-col .sub{font-size:.85rem;color:var(--quiet);margin-top:4px}
+  .fork-col ul{list-style:none;margin-top:22px}
+  .fork-col li{padding:9px 0;border-top:1px solid var(--rule);font-size:.95rem;color:var(--quiet)}
+  .fork-col li strong{color:var(--ink)}
+
+  /* proof */
+  .proof{background:var(--ink);color:var(--paper)}
+  .proof h2{color:var(--paper);border:none}
+  .proof h2 em{color:var(--gold)}
+  .proof .lede{color:#c9c5bc}
+  .proof .lede strong{color:var(--paper)}
+  .proof-line{
+    font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+    font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.15;max-width:22ch;margin-top:8px;
+  }
+  .proof-line b{color:var(--gold);font-style:normal}
+
+  /* fees */
+  .fees{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+  .fee{border:1px solid var(--rule);padding:30px 28px;background:#fff}
+  .fee h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem}
+  .fee .price{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;color:var(--garnet);margin-top:10px}
+  .fee .sub{font-size:.85rem;color:var(--quiet)}
+  .fee p{margin-top:14px;font-size:.95rem;color:var(--quiet)}
+  .fee-note{margin-top:26px;font-size:.95rem;color:var(--quiet);max-width:66ch}
+  .fee-note strong{color:var(--ink)}
+
+  /* closing CTA */
+  .close-cta .btns{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .contact-line{margin-top:26px;font-size:.95rem;color:var(--quiet)}
+  .contact-line a{color:var(--garnet)}
+
+  footer{border-top:1px solid var(--rule);padding:28px 0;font-size:.85rem;color:var(--quiet)}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--quiet)}
+
+  @media (max-width:840px){
+    .stats{grid-template-columns:1fr;gap:24px}
+    .thrones{grid-template-columns:1fr}
+    .throne + .throne{border-left:none;border-top:1px solid var(--rule)}
+    .fork{grid-template-columns:1fr}
+    .fork-col + .fork-col{border-left:none;border-top:1px solid var(--rule)}
+    .fees{grid-template-columns:1fr}
+    .step{grid-template-columns:48px 1fr;gap:16px}
+    section{padding:56px 0}
+    .hero{padding:64px 0 56px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="wordmark" href="https://mattervalue.ai">Matter<span>Value</span></a>
+    <nav>
+      <a href="https://mattervalue.ai">Marketing</a>
+      <a href="https://mattervalue.ai">AI Consulting</a>
+      <a href="candidate.html" class="cta">Confidential candidate intake</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap hero">
+    <p class="kicker">MatterValue Placement · powered by the Sovereign Reasoning System</p>
+    <h1>Recruiters match resumes. <em>We match trajectories.</em></h1>
+    <p class="dek">Legal recruiting fails on one-dimensional matching: book, comp, class year. We profile the candidate <strong>and</strong> the hiring group on three dimensions, run the market at machine speed, and gate every shortlist with senior judgment. <strong>Fixed fee. Retention verdict on the calendar.</strong></p>
+    <div class="hero-actions">
+      <a class="btn primary" href="mailto:paul@mattervalue.ai?subject=Placement%20mandate">Book a call (firms)</a>
+      <a class="btn" href="candidate.html">I'm a candidate (confidential)</a>
+    </div>
+    <p class="hero-note">No contingency · No ghosting · Nothing shared without written consent</p>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>The contingency model bills you when the deal closes. <em>Not when it works.</em></h2>
+      <p class="lede">A contingency recruiter is paid the day the offer is signed, and gone the day after. Whether the lateral <strong>stays, integrates, and builds</strong> was never their problem. It becomes yours, at full freight.</p>
+      <div class="stats">
+        <div class="stat"><b>25-30%</b><p>Of first-year compensation, the standard contingency fee for a legal placement.</p></div>
+        <div class="stat"><b>1 dimension</b><p>What traditional matching actually measures: the resume. Book, comp, practice area.</p></div>
+        <div class="stat"><b>Day 1</b><p>When the contingency recruiter's involvement ends. Integration is nobody's mandate.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Three dimensions. <em class="sov">Both sides of the table.</em></h2>
+      <p class="lede">The Sovereign Reasoning System profiles every candidate, and every hiring group, on the three dimensions that decide whether a placement compounds or collapses. A partner whose long game is institutionalizing a practice will not survive an eat-what-you-kill culture, no matter how well the comp maps. <strong>We measure that before anyone gets on a plane.</strong></p>
+      <div class="thrones">
+        <div class="throne">
+          <h3>The Innovator</h3>
+          <p class="role">Vision & instinct</p>
+          <p>What the candidate actually wants to build, and whether the group has room for it. Ambition mismatch is the quiet killer of lateral moves.</p>
+        </div>
+        <div class="throne">
+          <h3>The Executor</h3>
+          <p class="role">Operating style & structure</p>
+          <p>How they run matters, teams, time, and money, mapped against how the group really operates, not how the pitch deck says it does.</p>
+        </div>
+        <div class="throne">
+          <h3>The Legacy Builder</h3>
+          <p class="role">Trajectory & endgame</p>
+          <p>Where this move sits in a career's long arc. Placements aligned on legacy stay. Placements aligned only on comp shop again in two years.</p>
+        </div>
+      </div>
+      <p class="sov-credit">The framework comes from <a href="https://sovereignreasoning.com">the Sovereign Reasoning System</a>, the coaching methodology behind <em>We Three Kings &amp; Queens</em>. Structured Sovereign interviews for hiring groups and candidates are in development with our first partner firms.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>The engine does the labor. <em>The judgment does the gating.</em></h2>
+      <p class="lede">Same architecture as everything MatterValue builds: AI at machine speed, senior review on everything that reaches you.</p>
+      <div class="steps">
+        <div class="step gold">
+          <div>
+            <h3>Profile both sides</h3>
+            <p>The hiring group and each serious candidate complete a Sovereign profile. Firms get a written read on their own group before seeing a single resume. <strong>Most have never seen themselves measured.</strong></p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Map the market at machine speed</h3>
+            <p>The engine runs lateral targeting, comp analytics, and market mapping across your practice area and geography in days, not the quarter a traditional search burns. Outreach drafted in your firm's voice.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Gate the shortlist</h3>
+            <p>Nothing reaches a hiring partner without senior sign-off. Every candidate presented arrives with a <strong>three-dimensional fit memo</strong>, the artifact no contingency recruiter has ever handed you.</p>
+          </div>
+        </div>
+        <div class="step gold">
+          <div>
+            <h3>Insure the integration</h3>
+            <p>The first 180 days decide everything. Sovereign coaching for the placed lawyer, plus a structured check-in cadence with the group, is built into the engagement. <strong>We are still in the room when it matters.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Two ways to fill the seat. <em>Only one stays for the landing.</em></h2>
+      <div class="fork">
+        <div class="fork-col theirs">
+          <h3>The contingency recruiter</h3>
+          <p class="price">25-30%</p>
+          <p class="sub">Of first-year comp · Paid at signing · Gone at signing</p>
+          <ul>
+            <li>Matches on the resume: <strong>one dimension</strong></li>
+            <li>Incentivized to close, not to fit</li>
+            <li>No written fit analysis, ever</li>
+            <li>Integration is <strong>your problem</strong></li>
+            <li>If it fails: the fee is spent and the search restarts</li>
+          </ul>
+        </div>
+        <div class="fork-col ours">
+          <h3>MatterValue Placement</h3>
+          <p class="price">Fixed fee</p>
+          <p class="sub">Quoted before we start · Retention verdict at 12 months</p>
+          <ul>
+            <li>Matches on <strong>three dimensions, both sides</strong></li>
+            <li>AI-speed market mapping, senior-gated shortlist</li>
+            <li>A written fit memo with every candidate</li>
+            <li><strong>Integration coaching built in</strong>: 180 days</li>
+            <li>Renew on proof or part clean. No contingency math, no restart tax</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="wrap">
+      <h2>The method has a record.</h2>
+      <p class="proof-line"><b>Seven for seven</b> placing senior associates into partnership.</p>
+      <p class="lede" style="margin-top:22px">The Sovereign Reasoning coaching system has already done the hardest version of this work: architecting careers through the industry's narrowest gate. <strong>Placement is the same method, run from the firm's side of the table.</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Fixed fees. <em>On the record.</em></h2>
+      <div class="fees">
+        <div class="fee">
+          <h3>Senior associate → partner</h3>
+          <p class="price">$35,000</p>
+          <p class="sub">Flat, per placement · Sovereign integration coaching included</p>
+          <p>Where the seven-for-seven record lives. Sovereign profiles on candidate and group, gated shortlist, fit memos, 180-day integration.</p>
+        </div>
+        <div class="fee">
+          <h3>Lateral partner &amp; group placement</h3>
+          <p class="price">$60,000</p>
+          <p class="sub">Flat, per mandate · Quoted before signing · Multi-lawyer groups scoped individually</p>
+          <p>Full market map, comp analytics, both-sides Sovereign profiling, and integration coaching for the placed partner. Compare it to the contingency math on any partner over $250K.</p>
+        </div>
+      </div>
+      <p class="fee-note"><strong>No contingency. No hourly. No surprise at signing.</strong> Every mandate begins with a 30-minute call. It's free, and we'll tell you if we're not the right fit. Conflicts cleared before engagement.</p>
+    </div>
+  </section>
+
+  <section class="close-cta">
+    <div class="wrap">
+      <h2>Firms: twenty minutes, we'll show you the math. <em>Candidates: your name goes nowhere.</em></h2>
+      <p class="lede">Hiring groups get the fee comparison on your own numbers. Candidates get a confidential conversation: <strong>nothing is shared with any firm without your written consent.</strong></p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:paul@mattervalue.ai?subject=Placement%20mandate">Book the call (firms)</a>
+        <a class="btn" href="candidate.html">Confidential candidate intake</a>
+      </div>
+      <p class="contact-line"><a href="tel:+14802366669">+1 (480) 236-6669</a> · <a href="mailto:paul@mattervalue.ai">paul@mattervalue.ai</a> · Scottsdale, Arizona · Engagements nationwide</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 MatterValue.ai · All rights reserved</p>
+    <p><a href="https://sovereignreasoning.com">The Sovereign Reasoning System</a> · Built the way we tell firms to build.</p>
+  </div>
+</footer>
+
+</body>
+</html>
