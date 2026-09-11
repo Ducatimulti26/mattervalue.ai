@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confidential Candidate Intake | MatterValue Placement</title>
+<meta name="description" content="A confidential intake for lawyers considering a move. Nothing is shared with any firm without your written consent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF8;
+    --ink:#000000;
+    --garnet:#7A1F2B;
+    --gold:#9A7B2D;
+    --quiet:#5a564f;
+    --rule:#d9d5cc;
+    --max:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'Public Sans',system-ui,sans-serif;
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--garnet)}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+    outline:3px solid var(--garnet);outline-offset:2px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  header{border-bottom:1px solid var(--rule)}
+  .bar{display:flex;align-items:baseline;justify-content:space-between;padding:20px 0;gap:16px;flex-wrap:wrap}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--ink);text-decoration:none}
+  .wordmark span{color:var(--garnet)}
+  .bar a.back{font-size:.9rem;text-decoration:none;color:var(--ink)}
+  .bar a.back:hover{color:var(--garnet)}
+
+  .hero{padding:64px 0 36px}
+  .kicker{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:16px}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2rem,5vw,3rem);line-height:1.1;letter-spacing:-0.01em}
+  h1 em{font-style:italic;color:var(--garnet)}
+  .hero p{margin-top:20px;color:var(--quiet);max-width:56ch}
+  .hero p strong{color:var(--ink)}
+
+  .confidential{
+    border:1px solid var(--gold);background:#fff;
+    padding:18px 22px;margin:8px 0 48px;font-size:.95rem;color:var(--quiet);
+  }
+  .confidential strong{color:var(--ink)}
+
+  form{padding-bottom:80px}
+  fieldset{border:none;margin-bottom:44px}
+  legend{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem;
+    padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--rule);width:100%;
+  }
+  legend em{font-style:italic;color:var(--gold)}
+  .hint{font-size:.9rem;color:var(--quiet);margin:-12px 0 22px}
+  .hint a{color:var(--gold);font-weight:600}
+
+  .field{margin-bottom:22px}
+  label{display:block;font-weight:600;font-size:.95rem;margin-bottom:6px}
+  label .opt{font-weight:400;color:var(--quiet)}
+  input,select,textarea{
+    width:100%;padding:12px 14px;font:inherit;font-size:1rem;
+    border:1px solid var(--rule);background:#fff;color:var(--ink);border-radius:0;
+  }
+  textarea{min-height:110px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:600px){.row{grid-template-columns:1fr}}
+
+  .submit-block{border-top:1px solid var(--rule);padding-top:30px}
+  button{
+    font:inherit;font-weight:600;font-size:1.05rem;color:#fff;background:var(--garnet);
+    border:1.5px solid var(--garnet);padding:15px 32px;cursor:pointer;transition:background .15s;
+  }
+  button:hover{background:#5e1721;border-color:#5e1721}
+  .submit-note{margin-top:16px;font-size:.9rem;color:var(--quiet);max-width:56ch}
+  .fallback{margin-top:12px;font-size:.9rem;color:var(--quiet)}
+
+
+  /* ---------- why you're here ---------- */
+  .litany{padding:0 0 8px}
+  .litany h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.15;margin-bottom:28px}
+  .litany h2 em{font-style:italic;color:var(--garnet)}
+  .litany ul{list-style:none}
+  .litany li{
+    font-family:'Fraunces',serif;font-style:italic;font-size:clamp(1.15rem,2.8vw,1.5rem);
+    line-height:1.35;padding:14px 0;border-top:1px solid var(--rule);color:var(--ink);
+  }
+  .litany li:last-child{border-bottom:1px solid var(--rule)}
+  .litany .after{margin-top:28px;color:var(--quiet);max-width:58ch;font-size:1.05rem}
+  .litany .after strong{color:var(--ink)}
+
+  .move{padding:56px 0}
+  .move h2{
+    font-family:'Fraunces',serif;font-weight:600;font-style:italic;color:var(--garnet);
+    font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;margin-bottom:24px;
+  }
+  .move p{color:var(--quiet);max-width:58ch;margin-bottom:16px}
+  .move p strong{color:var(--ink)}
+  .move .sig{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--ink);margin-top:8px}
+  .move .how{margin-top:26px;font-size:1.05rem;color:var(--ink)}
+  .move .how a{color:var(--garnet);font-weight:600}
+
+  footer{border-top:1px solid var(--rule);padding:28px 0;font-size:.85rem;color:var(--quiet)}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--quiet)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="wordmark" href="https://mattervalue.ai">Matter<span>Value</span></a>
+    <a class="back" href="recruiting.html">← Back to Recruiting</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <p class="kicker">MatterValue Placement · Confidential candidate intake</p>
+    <h1>You know why you're reading this. <em>It's probably one of these.</em></h1>
+  </div>
+
+  <div class="litany">
+    <ul>
+      <li>Your firm doesn't have a plan for you.</li>
+      <li>You are not being valued.</li>
+      <li>Your firm doesn't have a vision.</li>
+      <li>You want a bigger platform.</li>
+      <li>You want a smaller platform.</li>
+      <li>You want to explore a different practice area, but you can't.</li>
+      <li>You have lifestyle constraints and need a more flexible place.</li>
+    </ul>
+    <p class="after">Whatever your reason, it does you no good when a recruiter throws your resume into a smile-and-dial process, promises everyone roses, walks off with the cash... and <strong>you are stuck, having wasted two years of your life.</strong></p>
+  </div>
+
+  <div class="move">
+    <h2>Move. But do it right.</h2>
+    <p>I developed the Sovereign Reasoning System over 30 years of coaching lawyers and advising law firms on strategy. <strong>Thirty years.</strong> Now I blend that experience with state-of-the-art AI mapping to increase the likelihood that your <strong>next</strong> two years are the best of your career.</p>
+    <p class="sig">Help me help you. :)</p>
+    <p class="sig">Paul Ward</p>
+    <p class="how">Fill out the form below confidentially, or email me directly at <a href="mailto:paul@mattervalue.ai?subject=Confidential%20candidate%20conversation">paul@mattervalue.ai</a>.</p>
+  </div>
+
+  <div class="confidential">
+    <strong>Confidentiality, on the record:</strong> nothing you write here is shared with any firm, or anyone else, without your written consent. Submitting this form sends it as an email from your own mail client directly to paul@mattervalue.ai. Nothing is stored on this website.
+  </div>
+
+  <form id="intake" novalidate>
+
+    <fieldset>
+      <legend>Who you are</legend>
+      <div class="row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="Name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Personal email <span class="opt">(not your firm address)</span></label>
+          <input id="email" name="Personal email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="phone">Cell <span class="opt">(optional)</span></label>
+          <input id="phone" name="Cell" type="tel" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="market">Market(s) you'd consider</label>
+          <input id="market" name="Markets" type="text" placeholder="e.g., Phoenix, Salt Lake, remote-friendly">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Where you are now</legend>
+      <div class="row">
+        <div class="field">
+          <label for="role">Current title &amp; firm</label>
+          <input id="role" name="Current title and firm" type="text" placeholder="e.g., Senior Associate, [firm]">
+        </div>
+        <div class="field">
+          <label for="practice">Practice area</label>
+          <input id="practice" name="Practice area" type="text">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="years">Years of practice</label>
+          <input id="years" name="Years of practice" type="text" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="seeking">What you're open to</label>
+          <select id="seeking" name="Open to">
+            <option value="">Choose one</option>
+            <option>Partner track at a new firm</option>
+            <option>Lateral partner move</option>
+            <option>Moving my group</option>
+            <option>In-house</option>
+            <option>Not sure yet, exploring</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="book">Portable business, if any <span class="opt">(optional; a range is fine)</span></label>
+        <input id="book" name="Portable business" type="text">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>The <em>Sovereign</em> three</legend>
+      <p class="hint">These map to the three dimensions we match on. Short answers are fine. We go deeper in conversation. Curious about the framework? See <a href="https://sovereignreasoning.com">Sovereign Reasoning</a>.</p>
+      <div class="field">
+        <label for="innovator">The Innovator: what do you actually want to build in the next chapter?</label>
+        <textarea id="innovator" name="Innovator" placeholder="The practice, the team, the thing your current seat doesn't have room for."></textarea>
+      </div>
+      <div class="field">
+        <label for="executor">The Executor: how do you work best, and what kind of platform lets you do it?</label>
+        <textarea id="executor" name="Executor" placeholder="How you run matters, teams, and your week. What structure helps; what gets in the way."></textarea>
+      </div>
+      <div class="field">
+        <label for="legacy">The Legacy Builder: ten years out, what does this move need to have made possible?</label>
+        <textarea id="legacy" name="Legacy Builder"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Anything else</legend>
+      <div class="field">
+        <label for="notes">Timing, constraints, firms to avoid, or anything we should know <span class="opt">(optional)</span></label>
+        <textarea id="notes" name="Notes"></textarea>
+      </div>
+    </fieldset>
+
+    <div class="submit-block">
+      <button type="submit">Send confidentially to Paul</button>
+      <p class="submit-note">This opens a pre-filled email in your own mail app addressed to paul@mattervalue.ai. You press send, so you see exactly what leaves your hands. You'll hear back within two business days.</p>
+      <p class="fallback">Prefer to skip the form? Email <a href="mailto:paul@mattervalue.ai?subject=Confidential%20candidate%20conversation">paul@mattervalue.ai</a> or call <a href="tel:+14802366669">+1 (480) 236-6669</a> directly.</p>
+    </div>
+
+  </form>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 MatterValue.ai · All rights reserved</p>
+    <p><a href="https://sovereignreasoning.com">The Sovereign Reasoning System</a></p>
+  </div>
+</footer>
+
+<script>
+/*
+  Submission: builds a mailto so nothing is ever stored server-side.
+  To switch to a hosted form endpoint later (e.g., Formspree/Basin),
+  replace the handler below with a fetch() POST to your endpoint and
+  update the confidentiality copy accordingly.
+*/
+document.getElementById('intake').addEventListener('submit', function(e){
+  e.preventDefault();
+  var form = e.target;
+  var name = form.querySelector('#name').value.trim();
+  var email = form.querySelector('#email').value.trim();
+  if(!name || !email){
+    alert('Please add your name and a personal email so Paul can reach you.');
+    (!name ? form.querySelector('#name') : form.querySelector('#email')).focus();
+    return;
+  }
+  var lines = [];
+  form.querySelectorAll('input, select, textarea').forEach(function(el){
+    if(el.name && el.value.trim()){
+      lines.push(el.name + ':\n' + el.value.trim() + '\n');
+    }
+  });
+  var subject = encodeURIComponent('Confidential candidate profile: ' + name);
+  var body = encodeURIComponent(
+    'CONFIDENTIAL: not to be shared without written consent\n\n' + lines.join('\n')
+  );
+  window.location.href = 'mailto:paul@mattervalue.ai?subject=' + subject + '&body=' + body;
+});
+</script>
+
+</body>
+</html>
