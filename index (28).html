@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatterValue.ai | The AI-run marketing department for law firms</title>
+<meta name="description" content="An AI marketing engine with senior judgment on top. Your firm's entire marketing function. Less than half the cost of the loaded hire, per term.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF8;
+    --ink:#000000;
+    --garnet:#7A1F2B;
+    --gold:#9A7B2D;
+    --quiet:#5a564f;
+    --rule:#d9d5cc;
+    --max:1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'Public Sans',system-ui,sans-serif;
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--garnet)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--garnet);outline-offset:3px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* ---------- top bar ---------- */
+  header{border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:10}
+  .bar{display:flex;align-items:baseline;justify-content:space-between;padding:18px 0;gap:16px;flex-wrap:wrap}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--ink);text-decoration:none}
+  .wordmark span{color:var(--garnet)}
+  nav{display:flex;gap:22px;flex-wrap:wrap}
+  nav a{font-size:.9rem;text-decoration:none;color:var(--ink)}
+  nav a:hover{color:var(--garnet)}
+  nav a.cta{color:var(--garnet);font-weight:600}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 64px}
+  .kicker{font-family:'Fraunces',serif;font-style:italic;color:var(--garnet);font-size:1.1rem;margin-bottom:20px}
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(2.6rem,6.5vw,4.8rem);line-height:1.04;letter-spacing:-0.01em;max-width:16ch;
+  }
+  h1 em{font-style:italic;color:var(--garnet)}
+  .hero .tm{font-size:.45em;vertical-align:super}
+  .hero p.dek{max-width:56ch;margin-top:28px;font-size:1.15rem;color:var(--quiet)}
+  .hero p.dek strong{color:var(--ink)}
+  .hero-actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:600;font-size:1rem;
+    padding:14px 26px;border:1.5px solid var(--ink);color:var(--ink);background:transparent;
+    transition:background .15s,color .15s;
+  }
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.primary{background:var(--garnet);border-color:var(--garnet);color:#fff}
+  .btn.primary:hover{background:#5e1721;border-color:#5e1721}
+  .hero-note{margin-top:22px;font-size:.9rem;color:var(--quiet)}
+  .hero-note strong{color:var(--ink)}
+
+  /* ---------- engine ticker ---------- */
+  .engine{border:1px solid var(--rule);background:#fff;margin-top:56px}
+  .engine-head{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--rule)}
+  .engine-head b{font-family:'Fraunces',serif;font-style:italic;font-weight:600}
+  .pulse{width:9px;height:9px;border-radius:50%;background:var(--garnet);display:inline-block;margin-right:8px}
+  .engine-item{display:flex;justify-content:space-between;gap:18px;padding:16px 22px;border-bottom:1px solid var(--rule);font-size:.95rem}
+  .engine-item:last-of-type{border-bottom:none}
+  .engine-item .what b{display:block;color:var(--ink)}
+  .engine-item .what span{color:var(--quiet);font-size:.88rem}
+  .tag{font-size:.8rem;font-weight:600;white-space:nowrap;align-self:center;padding:4px 12px;border:1px solid var(--rule)}
+  .tag.shipped{color:var(--garnet);border-color:var(--garnet)}
+  .tag.review{color:var(--quiet)}
+  .tag.judgment{color:var(--gold);border-color:var(--gold)}
+  .engine-foot{padding:12px 22px;font-size:.85rem;color:var(--quiet);background:var(--paper);border-top:1px solid var(--rule)}
+
+  /* ---------- sections ---------- */
+  section{padding:76px 0;border-top:1px solid var(--rule)}
+  h2{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.15;max-width:26ch;margin-bottom:18px;
+  }
+  h2 em{font-style:italic;color:var(--garnet)}
+  h2 em.sov{color:var(--gold)}
+  .lede{max-width:62ch;font-size:1.1rem;color:var(--quiet)}
+  .lede strong{color:var(--ink)}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:44px}
+  .stat b{display:block;font-family:'Fraunces',serif;font-weight:600;font-size:2.4rem;line-height:1;color:var(--garnet)}
+  .stat p{margin-top:10px;font-size:.92rem;color:var(--quiet);max-width:28ch}
+
+  /* engine steps */
+  .steps{margin-top:44px;counter-reset:step}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:30px 0;border-top:1px solid var(--rule);counter-increment:step}
+  .step:last-child{border-bottom:1px solid var(--rule)}
+  .step::before{content:counter(step,decimal-leading-zero);font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;color:var(--garnet)}
+  .step h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem}
+  .step .sub{font-size:.85rem;font-weight:600;color:var(--quiet);margin-top:2px}
+  .step p{margin-top:8px;color:var(--quiet);max-width:64ch}
+  .step p strong{color:var(--ink)}
+
+  /* fork */
+  .fork{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px;border:1px solid var(--rule)}
+  .fork-col{padding:34px 30px}
+  .fork-col + .fork-col{border-left:1px solid var(--rule)}
+  .fork-col.ours{background:#fff}
+  .fork-col h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem}
+  .fork-col .price{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;margin-top:10px}
+  .fork-col.theirs .price{color:var(--quiet)}
+  .fork-col.ours .price{color:var(--garnet)}
+  .fork-col .sub{font-size:.85rem;color:var(--quiet);margin-top:4px}
+  .fork-col ul{list-style:none;margin-top:22px}
+  .fork-col li{padding:9px 0;border-top:1px solid var(--rule);font-size:.95rem;color:var(--quiet)}
+  .fork-col li strong{color:var(--ink)}
+  .fork-after{margin-top:24px;font-size:.95rem;color:var(--quiet);max-width:66ch}
+  .fork-after strong{color:var(--ink)}
+
+  /* what you get */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+  .col-card{border:1px solid var(--rule);background:#fff;padding:30px 28px}
+  .col-card h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem}
+  .col-card .sub{font-size:.85rem;color:var(--quiet);margin-top:2px}
+  .col-card ul{list-style:none;margin-top:18px}
+  .col-card li{padding:9px 0;border-top:1px solid var(--rule);font-size:.95rem;color:var(--quiet)}
+  .col-card li strong{color:var(--ink)}
+  .pull{margin-top:26px;font-family:'Fraunces',serif;font-style:italic;font-size:1.25rem;max-width:44ch}
+
+  /* department map */
+  .map{margin-top:44px;border:1px solid var(--rule);background:#fff}
+  .map-row{display:grid;grid-template-columns:1fr auto;gap:18px;padding:16px 22px;border-bottom:1px solid var(--rule);align-items:center}
+  .map-row:last-child{border-bottom:none}
+  .map-row b{display:block}
+  .map-row span{font-size:.88rem;color:var(--quiet)}
+  .badge{font-size:.78rem;font-weight:600;padding:4px 12px;border:1px solid var(--garnet);color:var(--garnet);white-space:nowrap}
+  .badge.road{border-color:var(--rule);color:var(--quiet)}
+  .map-note{margin-top:18px;font-size:.88rem;color:var(--quiet)}
+
+  /* recruiting callout */
+  .recruit{background:var(--ink);color:var(--paper)}
+  .recruit .kicker{color:var(--gold)}
+  .recruit h2{color:var(--paper)}
+  .recruit h2 em{color:var(--gold)}
+  .recruit .lede{color:#c9c5bc}
+  .recruit .lede strong{color:var(--paper)}
+  .recruit .btn{border-color:var(--paper);color:var(--paper);margin-top:30px}
+  .recruit .btn:hover{background:var(--paper);color:var(--ink)}
+  .recruit .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600}
+  .recruit .btn.gold:hover{background:#b8944a;border-color:#b8944a;color:var(--ink)}
+  .recruit .btns{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* fee schedule */
+  .fees{margin-top:44px;counter-reset:fee}
+  .fee{display:grid;grid-template-columns:64px 1fr 220px;gap:24px;padding:30px 0;border-top:1px solid var(--rule);counter-increment:fee}
+  .fee:last-child{border-bottom:1px solid var(--rule)}
+  .fee::before{content:counter(fee,decimal-leading-zero);font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;color:var(--garnet)}
+  .fee h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem}
+  .fee h3 a{color:inherit;text-decoration:none}
+  .fee h3 a:hover{color:var(--garnet)}
+  .fee p{margin-top:8px;color:var(--quiet);font-size:.95rem;max-width:56ch}
+  .fee .pricing{text-align:right}
+  .fee .pricing b{display:block;font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;color:var(--garnet)}
+  .fee .pricing span{font-size:.82rem;color:var(--quiet)}
+  .fee.gold::before{color:var(--gold)}
+  .fee.gold .pricing b{color:var(--gold)}
+  .fee-note{margin-top:26px;font-size:.95rem;color:var(--quiet);max-width:66ch}
+  .fee-note strong{color:var(--ink)}
+
+  /* founder */
+  .founder-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;margin-top:44px}
+  .founder-grid p{color:var(--quiet);margin-bottom:18px}
+  .founder-grid p strong{color:var(--ink)}
+  .founder-stats .fstat{padding:22px 0;border-top:1px solid var(--rule)}
+  .founder-stats .fstat:last-child{border-bottom:1px solid var(--rule)}
+  .founder-stats b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;color:var(--garnet)}
+  .founder-stats p{font-size:.9rem;color:var(--quiet);margin:6px 0 0}
+
+  /* closing */
+  .close-cta .btns{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .contact-line{margin-top:26px;font-size:.95rem;color:var(--quiet)}
+  .contact-line a{color:var(--garnet)}
+
+  footer{border-top:1px solid var(--rule);padding:28px 0;font-size:.85rem;color:var(--quiet)}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--quiet)}
+
+  @media (max-width:840px){
+    .stats{grid-template-columns:1fr;gap:24px}
+    .fork{grid-template-columns:1fr}
+    .fork-col + .fork-col{border-left:none;border-top:1px solid var(--rule)}
+    .two-col{grid-template-columns:1fr}
+    .founder-grid{grid-template-columns:1fr;gap:36px}
+    .step{grid-template-columns:48px 1fr;gap:16px}
+    .fee{grid-template-columns:48px 1fr;gap:16px}
+    .fee .pricing{grid-column:2;text-align:left;margin-top:10px}
+    section{padding:56px 0}
+    .hero{padding:60px 0 48px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="wordmark" href="/">Matter<span>Value</span></a>
+    <nav>
+      <a href="#marketing">Marketing</a>
+      <a href="#consulting">Consulting</a>
+      <a href="recruiting.html">Recruiting</a>
+      <a href="#founder">Founder</a>
+      <a href="mailto:paul@mattervalue.ai?subject=Marketing%20engagement" class="cta">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap hero" id="marketing">
+    <p class="kicker">The AI-run marketing department for law firms</p>
+    <h1>Add brains, not headcount.<span class="tm">™</span></h1>
+    <p class="dek">Where <em style="font-family:'Fraunces',serif;font-style:italic;color:var(--garnet)">production</em> meets <em style="font-family:'Fraunces',serif;font-style:italic;color:var(--garnet)">judgment</em>. An AI engine runs your firm's entire marketing function. Senior legal marketing judgment sits on top. <strong>Less than half the cost of the loaded hire, per term.</strong></p>
+    <div class="hero-actions">
+      <a class="btn primary" href="mailto:paul@mattervalue.ai?subject=Marketing%20engagement">Book a call</a>
+      <a class="btn" href="#fork">See the math for one hire</a>
+    </div>
+    <p class="hero-note">No slop · No 18-month experiments · <strong>A verdict in 180 days</strong></p>
+
+    <div class="engine" aria-label="MatterValue engine, sample output">
+      <div class="engine-head"><b><span class="pulse" aria-hidden="true"></span>MatterValue Engine running</b></div>
+      <div class="engine-item">
+        <div class="what"><b>Client alert: new AZ non-compete ruling</b><span>Drafted in your litigation group's voice</span></div>
+        <span class="tag shipped">Shipped</span>
+      </div>
+      <div class="engine-item">
+        <div class="what"><b>Chambers submission, Commercial Litigation</b><span>Matter narratives assembled from your records</span></div>
+        <span class="tag review">In review</span>
+      </div>
+      <div class="engine-item">
+        <div class="what"><b>14 partner bios refreshed</b><span>LinkedIn synced · AI-answer visibility optimized</span></div>
+        <span class="tag shipped">Shipped</span>
+      </div>
+      <div class="engine-item">
+        <div class="what"><b>Q4 client acquisition strategy</b><span>Original ideation. This one's on us, not the machine</span></div>
+        <span class="tag judgment">Judgment layer</span>
+      </div>
+      <div class="engine-foot">Nothing ships without senior review.</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>You can't sell slop anymore. <em>The market won't buy it.</em></h2>
+      <p class="lede">And you can't pay six figures for someone to sign up for tables and push logos onto sponsorships. Here's the bet you're about to make: a full-priced hire, 18 to 24 months to find out if it works. Then, more often than you'd like, <strong>you run the search again.</strong></p>
+      <div class="stats">
+        <div class="stat"><b>1 in 3</b><p>First-chair legal marketers made a career move within a single year (BTI Consulting, 300+ firms canvassed).</p></div>
+        <div class="stat"><b>~$175K</b><p>What that $130K director posting really costs, loaded: benefits, taxes, software, and the recruiter's fee.</p></div>
+        <div class="stat"><b>18 to 24 mo</b><p>How long it takes to find out whether the hire worked. The market moves faster than your experiment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>AI does the labor. <em>Judgment does the gating.</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h3>Codified legal marketing judgment</h3>
+            <p class="sub">The playbooks</p>
+            <p>Three decades of what works in law firm marketing, <strong>written into systems, not trapped in someone's head.</strong> The engine knows what a Chambers narrative needs, what partners will approve, and what clients ignore.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Enterprise AI production</h3>
+            <p class="sub">The engine</p>
+            <p>Content, submissions, bios, campaigns, and analytics produced at machine speed on enterprise-grade AI. <strong>Inside your systems where possible. Nothing trains on your data. Ever.</strong></p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Senior review, every time</h3>
+            <p class="sub">The gate</p>
+            <p>Nothing reaches a partner or a client without senior sign-off. <strong>The machine accelerates. The judgment decides.</strong> That's the difference between production and slop.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fork">
+    <div class="wrap">
+      <h2>Two ways to fill the seat. <em>Only one of them has an end date.</em></h2>
+      <div class="fork">
+        <div class="fork-col theirs">
+          <h3>The hire</h3>
+          <p class="price">~$175K/yr</p>
+          <p class="sub">Loaded cost · 18 to 24 month experiment</p>
+          <ul>
+            <li>One person, <strong>no team</strong>, twelve partners with twelve opinions</li>
+            <li>Six months to learn your firm before anything ships</li>
+            <li>Strategist, writer, designer, and CRM admin in one body</li>
+            <li>If it fails: severance, a recruiter fee, and <strong>the search starts over</strong></li>
+          </ul>
+        </div>
+        <div class="fork-col ours">
+          <h3>MatterValue</h3>
+          <p class="price">&lt; ½ the loaded cost</p>
+          <p class="sub">$75K per six-month term · Scoreboard verdict at day 180</p>
+          <ul>
+            <li>An AI engine that <strong>never sleeps, never quits, never learns on your dime</strong></li>
+            <li>Senior judgment gating every deliverable</li>
+            <li>Works inside your systems. <strong>Nothing leaves your walls</strong></li>
+            <li>Day 180 delivers <strong>a verdict, on the calendar.</strong> Renew on proof or part clean. No severance, no recruiter, no restart</li>
+          </ul>
+        </div>
+      </div>
+      <p class="fork-after">Already have a department? <strong>Your team can deploy the engine too.</strong> It makes good marketers faster and frees your senior people for the work that needs them.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Everything AI can do. <em>And the thing it can't.</em></h2>
+      <div class="two-col">
+        <div class="col-card">
+          <h3>Machine speed</h3>
+          <p class="sub">The fungible work, accelerated</p>
+          <ul>
+            <li>Content, alerts, and campaigns produced in <strong>days, not quarters</strong></li>
+            <li>Bios, practice pages, and pitch materials at volume</li>
+            <li>Analytics and reporting the partners will actually read</li>
+            <li>Enterprise AI only. <strong>Nothing trains on your data.</strong> Ever</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <h3>Original ideation</h3>
+          <p class="sub">Where the judgment kicks in</p>
+          <ul>
+            <li>Thought-leading content that sounds like <strong>your lawyers</strong>, not a machine</li>
+            <li>Client acquisition strategies built for your actual market</li>
+            <li>Lateral hire suggestions you haven't considered</li>
+            <li>Offerings your competitors <strong>haven't thought of yet</strong></li>
+          </ul>
+        </div>
+      </div>
+      <p class="pull">Director-level judgment. Coordinator-level cost. That's not a discount; that's what happens when the production is machine speed.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Every function a modern legal marketing department runs. <em>One relationship.</em></h2>
+      <p class="lede">We deliver against the whole map, live today through your engagement, with firm-branded tools on the roadmap as we grow together.</p>
+      <div class="map">
+        <div class="map-row"><div><b>Content &amp; thought leadership</b><span>Client alerts, articles, newsletters, bylines, webinar support</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>Pitches, proposals &amp; RFPs</b><span>Pitch materials, proposal production, pursuit support</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>Rankings &amp; directories</b><span>Chambers, Legal 500, Benchmark submissions and referee management</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>Brand, website &amp; social</b><span>Positioning, bios, practice pages, lawyer-level LinkedIn</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>AI-answer visibility (GEO)</b><span>How ChatGPT, Claude, and Gemini describe your firm to buyers</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>Campaigns, email &amp; events</b><span>Client development campaigns, list management, event support</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>Marketing analytics &amp; budget</b><span>Spend audit, vendor rationalization, ROI reporting to the partnership</span></div><span class="badge">Live</span></div>
+        <div class="map-row"><div><b>Your firm-branded marketing app</b><span>One icon, your logo. Lawyers start every request there</span></div><span class="badge road">Roadmap</span></div>
+        <div class="map-row"><div><b>Data bridges to your systems</b><span>CRM, experience, and DMS connections for compounding intelligence</span></div><span class="badge road">Roadmap</span></div>
+      </div>
+      <p class="map-note">Live means delivered today, inside your engagement. Roadmap means it's being built with our first partner firms.</p>
+    </div>
+  </section>
+
+  <section class="recruit">
+    <div class="wrap">
+      <p class="kicker">New · MatterValue Placement, powered by the Sovereign Reasoning System</p>
+      <h2>Recruiters match resumes. <em>We match trajectories.</em></h2>
+      <p class="lede">Legal recruiting, rebuilt on the MatterValue architecture: three-dimensional matching on both sides of the table, AI-speed market mapping, senior judgment gating every shortlist, and integration coaching built into the fee. <strong>Fixed fee, no contingency, retention verdict on the calendar.</strong></p>
+      <div class="btns">
+        <a class="btn gold" href="recruiting.html">See the recruiting offer</a>
+        <a class="btn" href="candidate.html">Candidates: confidential intake</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="consulting">
+    <div class="wrap">
+      <p class="kicker" style="font-family:'Fraunces',serif;font-style:italic;color:var(--garnet);margin-bottom:16px">AI for law firms · Fixed fee · One operator</p>
+      <h2>Six offers. Fixed fees. <em>On the record.</em></h2>
+      <p class="lede">Operator judgment, delivered at software speed. MatterValue packages decades of law firm operating experience into fixed-fee products, a standing advisory retainer, and the Sovereign Reasoning coaching system. The AI does the labor. The operator does the judgment. <strong>You never pay for a consultant's calendar.</strong></p>
+      <div class="fees">
+        <div class="fee">
+          <div>
+            <h3>Standing Advisory Retainer</h3>
+            <p>A second brain for Managing Partners, COOs, and CIOs. Continuous access, monthly working sessions, board-level briefings. Operator-to-operator counsel on tap. Not a project, a relationship.</p>
+          </div>
+          <div class="pricing"><b>$7,500/mo</b><span>Quarterly commitment</span></div>
+        </div>
+        <div class="fee">
+          <div>
+            <h3>AI Readiness Diagnostic</h3>
+            <p>Structured intake, AI-run analysis of your tools, data, and economics, operator-reviewed written assessment in five business days. The two-week embedded diagnostic is dead. We killed ours.</p>
+          </div>
+          <div class="pricing"><b>$18,500</b><span>Flat · 5 business days</span></div>
+        </div>
+        <div class="fee">
+          <div>
+            <h3>The Product Library</h3>
+            <p>Governance &amp; policy packs, prompt libraries, ABA 512 disclosure language, workflow playbooks. Buy the artifact, not the project. Each pack ships with a working session to localize it.</p>
+          </div>
+          <div class="pricing"><b>From $2,500</b><span>Per pack · Licensed to your firm</span></div>
+        </div>
+        <div class="fee gold">
+          <div>
+            <h3>Sovereign Reasoning Coaching</h3>
+            <p>Career architecture for partners and senior associates in an industry being rewritten. Six-week cohorts and limited 1:1 seats. Seven for seven placing senior associates into partnership.</p>
+          </div>
+          <div class="pricing"><b>$3,500/seat</b><span>Cohort · 1:1 from $2,500/mo</span></div>
+        </div>
+        <div class="fee">
+          <div>
+            <h3>Legal Tech GTM Counsel</h3>
+            <p>Buyer-side advisory for founders and CROs selling into law firms. Positioning, pricing, procurement readiness, and a buyer-side teardown of your deck. Conflicts cleared before engagement.</p>
+          </div>
+          <div class="pricing"><b>From $10,000</b><span>By application · Limited</span></div>
+        </div>
+        <div class="fee gold">
+          <div>
+            <h3><a href="recruiting.html">Legal Recruiting &amp; Placement</a></h3>
+            <p>Fixed-fee placement built on the Sovereign Reasoning System: three-dimensional matching on both sides, AI-speed market mapping, a fit memo with every candidate, and 180 days of integration coaching built in.</p>
+          </div>
+          <div class="pricing"><b>From $35,000</b><span>Flat, per placement · No contingency</span></div>
+        </div>
+      </div>
+      <p class="fee-note"><strong>All engagements begin with a 30-minute call.</strong> Free, and we'll tell you if we're not the right fit. No hourly billing. Ever. <a href="mailto:paul@mattervalue.ai">paul@mattervalue.ai</a> · <a href="tel:+14802366669">+1 (480) 236-6669</a></p>
+    </div>
+  </section>
+
+  <section id="founder">
+    <div class="wrap">
+      <h2>Paul Ward</h2>
+      <p class="lede">MatterValue has been in motion for decades. AI brought it to the next level.</p>
+      <div class="founder-grid">
+        <div>
+          <p>With marketing chops from mega firms like Orrick and Gibson Dunn, to founding Law.com and selling it to ALM, Paul learned early the value of using technology to scale and economize law firm marketing.</p>
+          <p>For more than a decade he operated multiple firms' marketing departments or department functions, up to three firms simultaneously, leveraging technology. He was <strong>global head of PR for one firm while serving as CMO of another. At the same time.</strong></p>
+          <p>In his most recent role at Davis Miles, PLLC, Paul was COO, CMO, and CIO simultaneously, leveraging technology. He helped grow the firm <strong>36 percent in a five-year span.</strong> He knows how to get the most out of law firm roles.</p>
+          <p>With the advent of AI, Paul systematized those processes to do what he loves: level the playing field, so firms don't have to settle for an underqualified FTE when they can have sophisticated ideation and creation combined with rapid, efficient, accurate execution.</p>
+          <p><strong>That system is MatterValue.</strong></p>
+        </div>
+        <div class="founder-stats">
+          <div class="fstat"><b>3 firms</b><p>Operated simultaneously: global head of PR at one while CMO of another.</p></div>
+          <div class="fstat"><b>MIT · Tulane</b><p>MIT certificate in AI Strategy. Master's certificate, Tulane University.</p></div>
+          <div class="fstat"><b>CMO · CIO · COO</b><p>Decades in the chairs law firms actually trust. Including 36% firm growth over five years.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close-cta">
+    <div class="wrap">
+      <h2>Twenty minutes. <em>We'll show you the math.</em></h2>
+      <p class="lede">What the seat really costs, what we'd charge, and what you'd see in the first ninety days, on your firm's own numbers. If we're not the right fit, <strong>we'll say so on the call.</strong></p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:paul@mattervalue.ai?subject=Marketing%20engagement">Book the call</a>
+        <a class="btn" href="#consulting">Explore AI consulting</a>
+        <a class="btn" href="recruiting.html">Explore recruiting</a>
+      </div>
+      <p class="contact-line"><strong>Talk to Paul directly.</strong> Every engagement starts and stays at the principal level. <a href="tel:+14802366669">+1 (480) 236-6669</a> · <a href="mailto:paul@mattervalue.ai">paul@mattervalue.ai</a> · Scottsdale, Arizona · Engagements nationwide</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 MatterValue.ai · All rights reserved</p>
+    <p><a href="https://sovereignreasoning.com">The Sovereign Reasoning System</a> · Built the way we tell firms to build.</p>
+  </div>
+</footer>
+
+</body>
+</html>
